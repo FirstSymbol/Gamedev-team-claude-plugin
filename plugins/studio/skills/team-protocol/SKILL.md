@@ -73,3 +73,5 @@ Do not paste file contents back. Do not restate the task.
 - Load a reference file only when its trigger condition in your skill applies.
 - Spawn the minimum roles needed; prefer one specialist over a committee.
 - Terse output: no greetings, no summaries of what you are about to do, no repetition.
+- No scratch/helper files in the project or `.team/`; put throwaway scripts in the OS temp dir
+  and remove them before returning.
