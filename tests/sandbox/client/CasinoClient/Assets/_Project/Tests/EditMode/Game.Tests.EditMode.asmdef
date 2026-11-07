@@ -1,0 +1,1 @@
+{ "name": "Game.Tests.EditMode", "references": ["Game.Core","Game.Slots"], "includePlatforms": ["Editor"], "defineConstraints": ["UNITY_INCLUDE_TESTS"], "precompiledReferences": ["nunit.framework.dll"], "autoReferenced": false }

@@ -1,0 +1,20 @@
+{
+  "name": "studio",
+  "version": "1.0.0",
+  "description": "Virtual IT + gamedev studio team: orchestrator, leads and role agents (analysis, game design, art/UX, Unity/.NET engineering, QA, release, marketing, LiveOps, compliance) with token-lean skills.",
+  "author": {
+    "name": "FirstSymbol"
+  },
+  "keywords": [
+    "gamedev",
+    "unity",
+    "dotnet",
+    "agents",
+    "team",
+    "igaming",
+    "liveops"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/FirstSymbol/Gamedev-team-claude-plugin",
+  "homepage": "https://github.com/FirstSymbol/Gamedev-team-claude-plugin"
+}

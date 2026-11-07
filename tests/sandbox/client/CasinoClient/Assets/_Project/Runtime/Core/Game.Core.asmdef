@@ -1,0 +1,1 @@
+{ "name": "Game.Core", "references": ["UniTask", "VContainer"], "autoReferenced": true }

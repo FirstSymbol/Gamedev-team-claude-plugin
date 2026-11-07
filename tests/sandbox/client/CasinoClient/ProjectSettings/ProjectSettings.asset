@@ -1,0 +1,10 @@
+%YAML 1.1
+PlayerSettings:
+  companyName: SandboxCo
+  productName: CasinoClient
+  bundleVersion: 0.3.0
+  activeInputHandler: 1
+  scriptingBackend:
+    Android: 1
+    Standalone: 0
+  apiCompatibilityLevel: 6

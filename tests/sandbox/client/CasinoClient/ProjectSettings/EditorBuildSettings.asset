@@ -1,0 +1,9 @@
+%YAML 1.1
+EditorBuildSettings:
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/Boot.unity
+    guid: 1111
+  - enabled: 1
+    path: Assets/_Project/Scenes/Lobby.unity
+    guid: 2222

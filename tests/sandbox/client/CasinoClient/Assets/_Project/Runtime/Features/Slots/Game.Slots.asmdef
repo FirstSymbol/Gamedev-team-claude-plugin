@@ -1,0 +1,1 @@
+{ "name": "Game.Slots", "references": ["Game.Core"] }

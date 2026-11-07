@@ -1,0 +1,14 @@
+{
+  "name": "studio-market",
+  "owner": {
+    "name": "FirstSymbol"
+  },
+  "description": "Local marketplace for the Studio virtual IT/gamedev team plugin.",
+  "plugins": [
+    {
+      "name": "studio",
+      "source": "./plugins/studio",
+      "description": "Virtual IT + gamedev team: orchestrator, leads and ~25 role agents with Unity/.NET depth."
+    }
+  ]
+}

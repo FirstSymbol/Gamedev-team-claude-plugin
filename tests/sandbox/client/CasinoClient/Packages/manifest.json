@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "17.0.4",
+    "com.unity.inputsystem": "1.14.2",
+    "com.unity.addressables": "2.7.3",
+    "com.unity.test-framework": "1.5.1",
+    "com.unity.ugui": "2.0.0",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.16.9",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.modules.physics": "1.0.0"
+  }
+}

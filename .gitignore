@@ -1,0 +1,5 @@
+tests/out/
+tests/sandbox/**/bin/
+tests/sandbox/**/obj/
+__pycache__/
+*.pyc
