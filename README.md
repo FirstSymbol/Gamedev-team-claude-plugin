@@ -16,6 +16,9 @@ claude plugin list
 Внутри сессии то же самое: `/plugin marketplace add FirstSymbol/Gamedev-team-claude-plugin`,
 затем `/plugin install studio@studio-market`. Обновление: `claude plugin marketplace update studio-market`.
 
+Если на Windows при добавлении маркетплейса появляется `Filename too long`, значит, путь к
+папке конфигурации слишком длинный. Помогает команда `git config --global core.longpaths true`.
+
 Из локальной копии:
 ```powershell
 git clone https://github.com/FirstSymbol/Gamedev-team-claude-plugin.git
