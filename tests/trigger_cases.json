@@ -32,5 +32,7 @@
  {"id":"pm-en","prompt":"studio team: write a PRD and prioritize the roadmap for our next quarter using RICE.","expect":["product-manager"]},
  {"id":"arch-ru","prompt":"Команда studio: выбери архитектуру бэкенда — монолит или микросервисы — для нашей казино-экосистемы, оформи ADR.","expect":["tech-lead-architect"]},
  {"id":"implicit-unity-ru","prompt":"Почему у меня в Unity после async метода падает MissingReferenceException, когда объект уничтожен? Почини в Assets/_Project.","expect":["unity-developer"]},
- {"id":"implicit-econ-en","prompt":"How should we balance coin sinks and sources so our social casino economy doesn't inflate?","expect":["economy-monetization-designer"]}
+ {"id":"implicit-econ-en","prompt":"How should we balance coin sinks and sources so our social casino economy doesn't inflate?","expect":["economy-monetization-designer"]},
+ {"id":"recruiter-ru","prompt":"Команда studio: нам нужен ML-инженер для рекомендательной модели персональных офферов, такой роли в команде нет. Заведи нового агента.","expect":["team-recruiter"]},
+ {"id":"coach-en","prompt":"studio team: agents keep repeating the same mistakes from our lessons log. Update their playbooks from the recorded lessons.","expect":["team-coach"]}
 ]

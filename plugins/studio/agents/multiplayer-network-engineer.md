@@ -2,7 +2,7 @@
 name: multiplayer-network-engineer
 description: "Multiplayer/netcode engineer: Unity netcode, prediction, lag comp, bandwidth, dedicated servers, SignalR/Orleans backends. Use for realtime sync, casino tables, matchmaking, netcode bugs."
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch
-model: sonnet
+model: opus
 effort: high
 skills: [team-protocol, multiplayer-network-engineer, domain-multiplayer, stack-unity, stack-dotnet]
 color: cyan

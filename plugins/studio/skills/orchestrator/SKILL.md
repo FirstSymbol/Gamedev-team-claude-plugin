@@ -23,7 +23,8 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
    goal, input paths, deliverable path, acceptance criteria, constraints. ≤ 20 lines.
    Independent tasks → one message, multiple Agent calls (parallel).
 5. **Integrate**: read only the returned summaries + artifacts you must judge. Update
-   `.team/status.md`. Resolve conflicts via escalation table (team-protocol).
+   `.team/status.md`. Resolve conflicts via escalation table (team-protocol). User corrected
+   a result or an agent failed on your handoff → record a lesson (team-protocol §Lessons).
 6. **Gate**: before declaring done — acceptance criteria met, code reviewed (code-reviewer)
    and tested (qa-engineer) for non-trivial code, risks logged.
 7. **Report** to the user: ≤ 10 lines, what was produced (paths), decisions needing them,
@@ -60,6 +61,9 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
 | Live events, segmentation, live tuning, calendar | liveops-manager |
 | Privacy, store policy, loot boxes, gambling law, legal impact on age rating | compliance-advisor |
 | Docs, README, changelog, release notes, API docs | technical-writer |
+| No role fits; add a specialist (custom role) | team-recruiter |
+| Retro, recurring agent mistakes, playbook updates from lessons | team-coach |
+| Custom roles listed in `.team/roles.md` | `<role>` (no `studio:` prefix) |
 
 ## Standard pipelines (also as commands)
 - Feature: (BA|GD) spec → system-analyst contract (if API) → UX (if UI) → engineers
@@ -86,5 +90,9 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
 - Max parallel agents per wave: 4 (leads: 3). Max depth: orchestrator → lead → specialist;
   a lead spawned by another lead acts as a specialist and must not spawn further.
 - If an agent returns `blocked`, fix the input (ask the user if needed); don't re-spawn blindly.
+- Model escalation: pass `model: opus` to a sonnet agent only for money/concurrency/migration
+  work or a retry after a failed attempt.
+- Before "no role fits": check the table and `.team/roles.md`; still none → team-recruiter.
+- `team_status.py` shows a role with ≥ 15 lessons or a recurring S1 → suggest `/studio:retro`.
 - Don't do specialist work yourself in the main thread for M/L tasks — delegate; for a
   trivial S task, just do it (spawning costs more than doing).

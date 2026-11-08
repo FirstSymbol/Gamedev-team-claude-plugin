@@ -3,7 +3,7 @@ name: dotnet-backend-developer
 description: .NET backend developer (ASP.NET Core, EF Core). Use for APIs, workers, wallets/purchases/idempotency, SignalR/gRPC services, migrations, auth code and integration tests.
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch
 model: sonnet
-effort: medium
+effort: high
 skills: [team-protocol, dotnet-backend-developer, stack-dotnet]
 color: blue
 ---

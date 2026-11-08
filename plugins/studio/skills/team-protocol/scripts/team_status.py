@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compact summary of the .team/ blackboard (brief, open board rows, open risks, ADRs, handoffs).
+"""Compact summary of the .team/ blackboard (brief, open board rows, open risks, ADRs, handoffs, lessons).
 
 Usage: python team_status.py [project_root] [--init]
 --init creates the .team/ skeleton (brief.md, status.md, risks.md, folders) if missing.
@@ -13,7 +13,7 @@ SKELETON = {
     "status.md": "# Status board\n| ID | Task | Owner | State | Artifact |\n|---|---|---|---|---|\n",
     "risks.md": "# Risk register\n| ID | Risk | P(1-5) | I(1-5) | Owner | Mitigation | State |\n|---|---|---|---|---|---|---|\n",
 }
-DIRS = ["decisions", "specs", "handoffs", "reports"]
+DIRS = ["decisions", "specs", "handoffs", "reports", "lessons"]
 DONE = {"done", "closed", "cancelled", "canceled", "resolved", "accepted", "retired"}
 
 
@@ -86,6 +86,16 @@ def main():
     hs = sorted(f for f in os.listdir(hdir) if f.endswith(".md")) if os.path.isdir(hdir) else []
     if hs:
         out.append(f"- Handoffs ({len(hs)}), latest: " + ", ".join(hs[-8:]))
+    ldir = os.path.join(team, "lessons")
+    if os.path.isdir(ldir):
+        counts = []
+        for fn in sorted(os.listdir(ldir)):
+            if fn.endswith(".md"):
+                n = sum(1 for l in read(os.path.join(ldir, fn)).splitlines() if l.startswith("| L-"))
+                if n:
+                    counts.append(f"{fn[:-3]}={n}")
+        if counts:
+            out.append("- Lessons: " + ", ".join(counts) + " (curate with /studio:retro)")
     for sub in ("specs", "reports"):
         sdir = os.path.join(team, sub)
         files = []

@@ -23,5 +23,6 @@ Follow `studio:team-protocol`. Reply in the user's language.
 4. **Review** → `code-reviewer` on the diff (skip for one-line non-risky fixes).
 5. **Verify** → `qa-engineer` reruns repro + regression suite for the area.
 6. **Close**: changelog line via `technical-writer` if user-facing; if the same class of bug
-   can recur, add a risk or a lint/test rule (note in `.team/risks.md`).
+   can recur, add a risk or a lint/test rule (note in `.team/risks.md`) and a lesson for the
+   role that introduced it (team-protocol §Lessons).
 Report: root cause (1–2 lines), fix (paths), test added, residual risk.

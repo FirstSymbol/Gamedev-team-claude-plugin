@@ -15,10 +15,10 @@ business-analyst system-analyst data-analyst game-designer level-designer narrat
 economy-monetization-designer ux-ui-designer art-director technical-artist unity-developer
 dotnet-backend-developer frontend-developer multiplayer-network-engineer devops-sre-engineer
 security-engineer code-reviewer qa-engineer release-platform-manager marketing-manager
-liveops-manager compliance-advisor technical-writer""".split()
+liveops-manager compliance-advisor technical-writer team-recruiter team-coach""".split()
 SHARED = ["team-protocol", "orchestrator", "stack-unity", "stack-dotnet", "domain-igaming",
           "domain-f2p-liveops", "domain-multiplayer", "domain-pc-console"]
-WORKFLOWS = ["kickoff", "feature", "bugfix", "release", "status", "risk-review"]
+WORKFLOWS = ["kickoff", "feature", "bugfix", "release", "status", "risk-review", "retro"]
 MODELS = {"opus", "sonnet", "haiku", "inherit", "fable"}
 TOOLS = {"Read", "Write", "Edit", "Glob", "Grep", "Bash", "PowerShell", "Skill", "WebSearch",
          "WebFetch", "Agent", "NotebookEdit", "TodoWrite"}

@@ -23,6 +23,7 @@ Mission: many agents, one team, minimal tokens. Every studio agent follows this.
                           economy/ liveops/ marketing/ qa/ release/ ops/ security/ netcode/ compliance/
 .team/handoffs/H-NNN-<from>-to-<to>.md
 .team/reports/...         test reports, reviews, analyses, playtest notes
+.team/lessons/<role>.md   mistakes turned into rules (scripts/lessons.py; common.md = all roles)
 ```
 - Write artifacts to files; pass PATHS, not contents, between agents.
 - Before working, read only what you need: `brief.md`, your handoff, files it names.
@@ -41,9 +42,24 @@ ARTIFACTS: <paths written/changed>
 SUMMARY: <≤ 5 bullets, facts only>
 DECISIONS: <made or needed, with ADR path>
 RISKS: <new/raised, with risks.md IDs>
+LESSONS: <IDs added/bumped, or "none">
 NEXT: <recommended next role + task>
 ```
 Do not paste file contents back. Do not restate the task.
+
+## Lessons (do not repeat mistakes)
+Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your role>` (see Token discipline).
+- **Before work**: `list --role <you> [--tags <area>]` (project + global, ≤ 25 lines). Treat
+  each listed rule as a hard rule for this task; S1 rules override your playbook defaults.
+- **After work, record a lesson** (`add --sev --tags --rule --evidence`) when: your build/test
+  failed and you fixed it; a reviewer/QA/human found a defect in your work; a wrong assumption
+  blocked you; a fix took > 1 attempt; an agent you called returned unusable output.
+- code-reviewer, qa-engineer, security-engineer: for each blocker/major found, add the lesson
+  under the AUTHOR's role. Orchestrator/leads: routing or handoff mistakes under own role.
+- Rule = one generic, actionable sentence: "Do X when Y" / "Never X; instead Y" (≤ 220 chars).
+  Not a bug diary: no secrets, personal data or one-off facts. Duplicates are auto-bumped
+  (Hits) - recurring = most important. Sev: S1 money/data/security/crash, S2 rework, S3 minor.
+- Never edit lesson files by hand; `team-coach` curates them (`/studio:retro`).
 
 ## Definition of Ready (before starting)
 - Goal and acceptance criteria are explicit; inputs exist at stated paths; owner of each
@@ -51,7 +67,7 @@ Do not paste file contents back. Do not restate the task.
 
 ## Definition of Done (generic; roles add their own)
 - Deliverable at stated path; acceptance criteria checked one by one; assumptions listed;
-  risks logged; status row updated; next handoff named.
+  risks logged; lessons recorded; status row updated; next handoff named.
 - Code: builds, tests pass, no new warnings from analyzers, reviewed by code-reviewer for
   non-trivial changes.
 
@@ -66,7 +82,8 @@ Do not paste file contents back. Do not restate the task.
 ## Token discipline
 - Use scripts for discovery instead of browsing trees. Scripts dir:
   `${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/` — `scan_unity_project.py <dir>`,
-  `scan_dotnet_solution.py <dir>`, `team_status.py <dir> [--init]` (run: `python "<scripts dir>/<script>" <project dir>`).
+  `scan_dotnet_solution.py <dir>`, `team_status.py <dir> [--init]`, `lessons.py <cmd> <dir> ...`
+  (run: `python "<scripts dir>/<script>" <project dir>`).
   Read their summary, not the file tree.
 - Grep/Glob before Read; read file ranges, not whole large files. Never read `Library/`,
   `Temp/`, `obj/`, `bin/`, `node_modules/`, `.meta` files in bulk, or binary assets.

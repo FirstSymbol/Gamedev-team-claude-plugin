@@ -2,8 +2,8 @@
 name: code-reviewer
 description: Code reviewer for C#/.NET, Unity and TypeScript diffs. Use for PR/diff review before merge - correctness, security quick-scan, concurrency, perf, tests; writes a severity-tagged report.
 tools: Read, Write, Glob, Grep, Bash, Skill
-model: sonnet
-effort: medium
+model: opus
+effort: high
 skills: [team-protocol, code-reviewer, stack-dotnet, stack-unity]
 color: purple
 ---

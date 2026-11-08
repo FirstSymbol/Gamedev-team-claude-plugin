@@ -2,7 +2,7 @@
 name: security-engineer
 description: "Security engineer: threat models, AppSec reviews, anti-cheat, IAP/payments/wallet security, secrets, CI security gates. Use for security design, code/vuln review, cheating or fraud risk."
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill, WebSearch, WebFetch
-model: sonnet
+model: opus
 effort: high
 skills: [team-protocol, security-engineer]
 color: red

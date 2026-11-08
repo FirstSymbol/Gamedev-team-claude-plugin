@@ -59,7 +59,7 @@ Body sections, in this order (use exactly these headings; terse bullets, no pros
 name: <role>
 description: <≤ 210 chars. "<Role>: <scope>. Use for <triggers>." Shown to the orchestrator every turn.>
 tools: <minimal whitelist, comma-separated>   # designers: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch, Skill (+ Bash only to run own sim/forecast scripts)
-model: <opus|sonnet|haiku>                     # leads opus, specialists sonnet, routine haiku
+model: <opus|sonnet|haiku>                     # leads + high-stakes specialists opus, others sonnet, routine haiku
 effort: <low|medium|high>
 skills: [team-protocol, <role>, <shared/domain skills it always needs>]
 color: <red|blue|green|yellow|purple|orange|pink|cyan>
@@ -90,4 +90,8 @@ Engineering: unity-developer, dotnet-backend-developer, frontend-developer,
 Quality/release: qa-engineer, release-platform-manager
 Market/ops: marketing-manager, liveops-manager, compliance-advisor
 Routine (haiku): technical-writer
+Team meta (opus): team-recruiter (creates new roles), team-coach (lessons -> playbooks)
+High-stakes specialists on opus: code-reviewer, security-engineer, multiplayer-network-engineer
 Main thread: orchestrator (skill, not an agent)
+Custom project roles (created by team-recruiter) live in the target project's `.claude/agents/`
+and `.claude/skills/`, follow this spec, and are registered in `.team/roles.md`.
