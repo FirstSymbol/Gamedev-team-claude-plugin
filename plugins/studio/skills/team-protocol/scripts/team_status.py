@@ -6,6 +6,7 @@ Usage: python team_status.py [project_root] [--init]
 """
 import os
 import re
+import subprocess
 import sys
 
 SKELETON = {
@@ -23,6 +24,34 @@ def read(p):
             return f.read()
     except OSError:
         return ""
+
+
+def git(root, *args):
+    try:
+        r = subprocess.run(["git", "-C", root, *args], capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() if r.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
+def context_line(root, team):
+    meta = read(os.path.join(team, "context", "meta.md"))
+    if not meta:
+        return "- Context cache: none (existing codebase? run /studio:onboard)"
+    m = re.search(r"Commit:\s*([0-9a-f]{7,40})", meta)
+    d = re.search(r"Date:\s*([\d-]+)", meta)
+    line = f"- Context cache: {d.group(1) if d else '?'}"
+    if m:
+        behind = git(root, "rev-list", "--count", f"{m.group(1)}..HEAD")
+        changed = git(root, "diff", "--name-only", f"{m.group(1)}..HEAD")
+        n = len(changed.splitlines()) if changed else 0
+        if behind:
+            line += f", {behind} commits / {n} files behind HEAD"
+            if int(behind) >= 30 or n >= 50:
+                line += " -> STALE: run /studio:onboard --refresh"
+        else:
+            line += f" (commit {m.group(1)[:8]} not found)"
+    return line
 
 
 def table_rows(text):
@@ -57,6 +86,7 @@ def main():
     brief = read(os.path.join(team, "brief.md")).strip().splitlines()
     if brief:
         out.append("- Brief: " + " | ".join(l.strip() for l in brief[1:7] if l.strip())[:600])
+    out.append(context_line(root, team))
     rows = table_rows(read(os.path.join(team, "status.md")))
     open_rows = [r for r in rows if len(r) >= 4 and r[3].lower() not in DONE]
     out.append(f"- Board: {len(rows)} tasks, {len(open_rows)} open")

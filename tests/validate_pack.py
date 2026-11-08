@@ -18,7 +18,7 @@ security-engineer code-reviewer qa-engineer release-platform-manager marketing-m
 liveops-manager compliance-advisor technical-writer team-recruiter team-coach""".split()
 SHARED = ["team-protocol", "orchestrator", "stack-unity", "stack-dotnet", "domain-igaming",
           "domain-f2p-liveops", "domain-multiplayer", "domain-pc-console"]
-WORKFLOWS = ["kickoff", "feature", "bugfix", "release", "status", "risk-review", "retro"]
+WORKFLOWS = ["kickoff", "feature", "bugfix", "release", "status", "risk-review", "retro", "onboard"]
 MODELS = {"opus", "sonnet", "haiku", "inherit", "fable"}
 TOOLS = {"Read", "Write", "Edit", "Glob", "Grep", "Bash", "PowerShell", "Skill", "WebSearch",
          "WebFetch", "Agent", "NotebookEdit", "TodoWrite"}

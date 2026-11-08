@@ -9,6 +9,8 @@ Input: $ARGUMENTS
 
 Follow `studio:orchestrator` and `studio:team-protocol`. Scripts: `${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/`. Reply in the user's language.
 
+Existing project already in progress → use `/studio:onboard` instead (keeps AS-IS decisions).
+
 ## 0. Intake (main thread)
 - `team_status.py <root> --init`. If an existing codebase is present, run the scanners and
   save to `.team/reports/`.

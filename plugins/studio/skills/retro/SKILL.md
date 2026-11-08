@@ -2,18 +2,19 @@
 name: retro
 description: Run a studio retro - curate the lessons log of agent mistakes and update agent playbooks so errors are not repeated.
 disable-model-invocation: true
-argument-hint: "[role] [from <project path> ...]"
+argument-hint: "[role] [from <project dir | notes file> ...]"
 ---
 # /studio:retro - learn from mistakes
-Arguments: $ARGUMENTS (optional focus role; `from` + project paths to harvest)
+Arguments: $ARGUMENTS (optional focus role; `from` + project folders and/or free-form files)
 
 Follow `studio:team-protocol`. Reply in the user's language.
 
 1. **Snapshot (main thread)**: `python "${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/lessons.py" stats <root>`.
    Pack scope = `<root>/plugins/studio/AUTHORING.md` exists (also check `<root>/lessons/`).
-   No lessons anywhere and no source projects → tell the user and stop.
-2. **Coach** → `team-coach`: curate project + global lessons (focus role if given) and the
-   source projects, embed recurring/S1 rules into playbooks by scope, write
+   Each `from` path: folder = source project, file = free-form notes (any format).
+   Missing path → tell the user. No lessons anywhere and no sources → tell the user and stop.
+2. **Coach** → `team-coach`: curate project + global lessons (focus role if given), the
+   source projects and free-form files (pass each path with its kind), embed recurring/S1 rules into playbooks by scope, write
    `.team/reports/retro-<date>.md` (+ `pack-improvements.md` outside pack scope).
 3. **Port roles** (pack scope): if the report lists custom roles from source projects, ask
    the user which to add to the pack; for each chosen one spawn `team-recruiter` in port

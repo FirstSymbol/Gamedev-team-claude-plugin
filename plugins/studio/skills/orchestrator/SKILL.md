@@ -16,7 +16,8 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
    Do NOT browse or read project code in the main thread to "understand" it — that is the
    specialists' job and costs main-thread context.
 3. **Prepare (M/L only)**: `python "${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/team_status.py" <root> --init`,
-   write/refresh `.team/brief.md` (≤ 10 lines). For code work run `scan_unity_project.py` /
+   write/refresh `.team/brief.md` (≤ 10 lines). Existing code, no `.team/context/` → suggest
+   `/studio:onboard` (cached context); with it, pass `project-map.md` to agents. Else run `scan_unity_project.py` /
    `scan_dotnet_solution.py` (same dir) once, save to `.team/reports/scan-unity.md` /
    `scan-dotnet.md`; pass that path to engineers.
 4. **Dispatch** with the Agent tool (`subagent_type: studio:<role>`). Prompt = handoff:

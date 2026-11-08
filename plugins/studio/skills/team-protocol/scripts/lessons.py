@@ -13,6 +13,8 @@ Usage:
   python lessons.py bump <root> --id <L-NNN> --role <role> [--global]
   python lessons.py promote <root> --id <L-NNN> --role <role>
   python lessons.py stats <root>
+  python lessons.py delete <root> --id <ID> --role <role> [--global] [--reason "<why>"]
+  python lessons.py move   <root> --id <ID> --role <role> --to <role> [--global]
   python lessons.py export <dir> [--replace]   global store -> <dir> (backup / git sync)
   python lessons.py import <dir>               <dir> -> global store (new machine / teammate)
 export/import merge by rule text (Hits = max, never summed), so repeated syncs are idempotent.
@@ -93,6 +95,8 @@ def cmd_list(a):
         for role in dict.fromkeys(["common", a.role]):
             for r in rows(read(path_for(d, role))):
                 tags = {t.strip().lower() for t in r[3].split(",")}
+                if role == "common" and a.no_common and a.role != "common":
+                    continue
                 if want and not (want & tags) and role != "common":
                     continue
                 found.append((scope, role, r))
@@ -127,6 +131,9 @@ def cmd_add(a):
     for r in rs:
         if norm(r[4]) == norm(rule):
             r[6] = str(int(r[6]) + 1 if r[6].isdigit() else 2)
+            ev = clean(a.evidence or "")
+            if ev and ev not in r[5]:
+                r[5] = ev if r[5] == "-" else f"{r[5]}; {ev}"
             write_rows(p, a.role, rs)
             print(f"DUPLICATE: bumped {r[0]} to x{r[6]}")
             return 0
@@ -172,6 +179,39 @@ def cmd_promote(a):
     hit[5] = f"{hit[5]}; promoted {gid}"
     write_rows(src, a.role, rs)
     print(f"PROMOTED {a.id} -> {gid} ({gp})")
+    return 0
+
+
+def cmd_delete(a):
+    p = path_for(store(a.root, a.glob), a.role)
+    rs = rows(read(p))
+    keep = [r for r in rs if r[0] != a.id]
+    if len(keep) == len(rs):
+        print(f"ERROR: {a.id} not found in {p}")
+        return 1
+    write_rows(p, a.role, keep)
+    print(f"DELETED {a.id} from {a.role}" + (f" ({a.reason})" if a.reason else ""))
+    return 0
+
+
+def cmd_move(a):
+    d = store(a.root, a.glob)
+    src = path_for(d, a.role)
+    rs = rows(read(src))
+    hit = next((r for r in rs if r[0] == a.id), None)
+    if not hit:
+        print(f"ERROR: {a.id} not found in {src}")
+        return 1
+    dst = path_for(d, a.to)
+    drs = rows(read(dst))
+    same = next((x for x in drs if norm(x[4]) == norm(hit[4])), None)
+    if same:
+        same[6] = str((int(same[6]) if same[6].isdigit() else 1) + (int(hit[6]) if hit[6].isdigit() else 1))
+    else:
+        drs.append(hit)
+    write_rows(dst, a.to, drs)
+    write_rows(src, a.role, [r for r in rs if r[0] != a.id])
+    print(f"MOVED {a.id} {a.role} -> {a.to}" + (" (merged)" if same else ""))
     return 0
 
 
@@ -246,7 +286,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("list", "add", "bump", "promote", "stats", "export", "import"):
+    for name in ("list", "add", "bump", "promote", "stats", "export", "import", "delete", "move"):
         s = sub.add_parser(name)
         s.add_argument("root", nargs="?", default=".")
         if name not in ("stats", "export", "import"):
@@ -256,19 +296,25 @@ def main():
         if name == "list":
             s.add_argument("--tags")
             s.add_argument("--limit", type=int, default=25)
+            s.add_argument("--no-common", dest="no_common", action="store_true")
         if name == "add":
             s.add_argument("--sev", choices=["S1", "S2", "S3"], default="S2")
             s.add_argument("--tags")
             s.add_argument("--rule", required=True)
             s.add_argument("--evidence")
-        if name in ("bump", "promote"):
+        if name in ("bump", "promote", "delete", "move"):
             s.add_argument("--id", required=True)
-        if name in ("add", "bump"):
+        if name == "delete":
+            s.add_argument("--reason")
+        if name == "move":
+            s.add_argument("--to", required=True)
+        if name in ("add", "bump", "delete", "move"):
             s.add_argument("--global", dest="glob", action="store_true")
     a = ap.parse_args()
     return {"list": cmd_list, "add": cmd_add, "bump": cmd_bump,
             "promote": cmd_promote, "stats": cmd_stats,
-            "export": cmd_export, "import": cmd_import}[a.cmd](a)
+            "export": cmd_export, "import": cmd_import,
+            "delete": cmd_delete, "move": cmd_move}[a.cmd](a)
 
 
 if __name__ == "__main__":

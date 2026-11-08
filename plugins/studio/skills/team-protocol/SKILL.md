@@ -24,6 +24,7 @@ Mission: many agents, one team, minimal tokens. Every studio agent follows this.
 .team/handoffs/H-NNN-<from>-to-<to>.md
 .team/reports/...         test reports, reviews, analyses, playtest notes
 .team/lessons/<role>.md   mistakes turned into rules (scripts/lessons.py; common.md = all roles)
+.team/context/            project cache from /studio:onboard: project-map.md, meta.md (commit)
 ```
 - Write artifacts to files; pass PATHS, not contents, between agents.
 - Before working, read only what you need: `brief.md`, your handoff, files it names.
@@ -59,7 +60,7 @@ Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your rol
 - Rule = one generic, actionable sentence: "Do X when Y" / "Never X; instead Y" (≤ 220 chars).
   Not a bug diary: no secrets, personal data or one-off facts. Duplicates are auto-bumped
   (Hits) - recurring = most important. Sev: S1 money/data/security/crash, S2 rework, S3 minor.
-- Never edit lesson files by hand; `team-coach` curates them (`/studio:retro`).
+- Never edit lesson files by hand; use `lessons.py`. `team-coach` curates them (`/studio:retro`).
 
 ## Definition of Ready (before starting)
 - Goal and acceptance criteria are explicit; inputs exist at stated paths; owner of each
@@ -80,6 +81,9 @@ Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your rol
   git push/force-push, prod deploy) → stop and ask the human.
 
 ## Token discipline
+- Existing `.team/context/project-map.md` → read it BEFORE any Glob/Grep of code; trust it for
+  layout, commands, conventions; Grep only to confirm specifics. Wrong or missing facts →
+  note them in your return (NEXT: `/studio:onboard --refresh`); never rewrite it yourself.
 - Use scripts for discovery instead of browsing trees. Scripts dir:
   `${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/` — `scan_unity_project.py <dir>`,
   `scan_dotnet_solution.py <dir>`, `team_status.py <dir> [--init]`, `lessons.py <cmd> <dir> ...`
