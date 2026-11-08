@@ -43,6 +43,7 @@ claude plugin install studio@studio-market --scope user
 | Статус | `/studio:status` |
 | Ревью рисков | `/studio:risk-review` |
 | Разбор ошибок команды и обновление агентов | `/studio:retro` (или `/studio:retro unity-developer`) |
+| Влить опыт проектов в пак (в папке этого репо) | `/studio:retro from D:\Projects\Casino D:\Projects\Puzzle` |
 | Нужен специалист, которого нет в команде | «Команда studio, нам нужен ML-инженер для …» → `team-recruiter` |
 | Конкретная роль | «Используй агента studio:economy-monetization-designer …» |
 
@@ -112,6 +113,43 @@ python "<плагин>/skills/team-protocol/scripts/lessons.py" list . --role un
 python "<плагин>/skills/team-protocol/scripts/lessons.py" stats .
 ```
 
+## Как залить обученную команду в git
+
+Опыт команды лежит в нескольких местах, и всё это можно собрать в этот репозиторий:
+
+| Что | Где копится | Как попадает в репозиторий |
+|---|---|---|
+| Глобальные уроки | `~/.claude/studio/lessons/` | `lessons.py export lessons` → папка `lessons/` репозитория |
+| Уроки и правки к паку из проектов | `<проект>/.team/lessons/`, `.team/reports/pack-improvements.md` | `/studio:retro from <пути к проектам>` |
+| Кастомные роли из проектов | `<проект>/.claude/agents/`, `.claude/skills/` | тот же retro предложит перенести их в пак |
+| Плейбуки агентов | `plugins/studio/` | коуч правит их напрямую |
+
+Порядок действий:
+1. Откройте Claude Code в папке этого репозитория.
+2. Запустите `/studio:retro from D:\Projects\Casino D:\Projects\Puzzle`, перечислив проекты,
+   где работала команда. Коуч сделает следующее:
+   - импортирует `lessons/` в глобальное хранилище;
+   - соберёт уроки и `pack-improvements.md` из проектов;
+   - перенесёт устоявшиеся правила в плейбуки и прогонит валидатор;
+   - экспортирует вычищенные глобальные уроки обратно в `lessons/`.
+
+   Если в проектах есть кастомные роли, retro спросит, какие из них добавить в пак, и
+   перенесёт выбранные через `team-recruiter`.
+3. Проверьте `git diff`, поднимите версию в `plugins/studio/.claude-plugin/plugin.json`,
+   затем закоммитьте и запушьте.
+4. На каждой машине выполните `claude plugin marketplace update studio-market`.
+
+Перенос уроков на новую машину или коллеге (из клона репозитория):
+```powershell
+python plugins/studio/skills/team-protocol/scripts/lessons.py import lessons   # в глобальное хранилище
+python plugins/studio/skills/team-protocol/scripts/lessons.py export lessons   # бэкап обратно в репо
+```
+Синхронизация сливает уроки по тексту правила. `Hits` берётся по максимуму и не
+суммируется, поэтому повторный import или export ничего не дублирует. `export --replace`
+делает папку точной копией хранилища, retro использует этот режим после чистки.
+Папка `.team/` этого репозитория добавлена в `.gitignore`: рабочие отчёты retro в коммит
+не попадают.
+
 ## Новые роли: team-recruiter
 
 Если задаче нужен специалист, которого нет в составе, оркестратор зовёт `team-recruiter`.
@@ -170,6 +208,7 @@ plugins/studio/
   skills/<роль>/references/*.md     глубокая база знаний
   skills/<роль>/templates/*.md      шаблоны артефактов
   skills/team-protocol/scripts/     сканеры проекта, статус команды, журнал уроков (lessons.py)
+lessons/                            глобальные уроки команды в git (export/import)
 tests/
   validate_pack.py                  проверка структуры и бюджетов
   run_triggers.py + trigger_cases.json   проверка маршрутизации (RU/EN запросы)
@@ -184,10 +223,12 @@ claude plugin validate "plugins/studio"             # официальный в�
 python tests/run_triggers.py --jobs 4               # маршрутизация (тратит токены)
 ```
 
-Результаты на 2026-11-08 (v1.1.0):
+Результаты на 2026-11-08 (v1.2.0):
 - `validate_pack.py --strict` и `claude plugin validate`: 0 ошибок, 0 предупреждений
   (45 скиллов, 30 агентов). Добавлены кейсы маршрутизации для `team-recruiter` и
   `team-coach`; полный прогон `run_triggers.py` после этих изменений не делался.
+- `lessons.py`: проверены add/дубли/bump/list/stats/promote и синхронизация двух машин
+  через папку (import/export идемпотентны, `--replace` удаляет лишнее).
 
 Результаты на 2026-11-07 (v1.0.0):
 - `validate_pack.py --strict` и `claude plugin validate --strict`: 0 ошибок, 0 предупреждений.

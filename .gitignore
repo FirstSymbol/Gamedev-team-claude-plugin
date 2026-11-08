@@ -3,3 +3,6 @@ tests/sandbox/**/bin/
 tests/sandbox/**/obj/
 __pycache__/
 *.pyc
+
+# studio blackboard created when running /studio:retro or the team in this repo
+.team/

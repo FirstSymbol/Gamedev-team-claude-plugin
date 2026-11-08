@@ -13,6 +13,10 @@ Usage:
   python lessons.py bump <root> --id <L-NNN> --role <role> [--global]
   python lessons.py promote <root> --id <L-NNN> --role <role>
   python lessons.py stats <root>
+  python lessons.py export <dir> [--replace]   global store -> <dir> (backup / git sync)
+  python lessons.py import <dir>               <dir> -> global store (new machine / teammate)
+export/import merge by rule text (Hits = max, never summed), so repeated syncs are idempotent.
+--replace makes <dir> an exact copy of the global store (use after curation deleted rows).
 """
 import argparse
 import datetime
@@ -71,8 +75,7 @@ def all_ids(d):
 
 
 def next_id(d, prefix):
-    nums = [int(m.group(1)) for i in all_ids(d) if (m := re.match(prefix + r"-(\d+)$", i))]
-    return f"{prefix}-{(max(nums) + 1 if nums else 1):03d}"
+    return next_id_from(all_ids(d), prefix)
 
 
 def clean(s):
@@ -172,6 +175,57 @@ def cmd_promote(a):
     return 0
 
 
+def merge_dir(src, dst, replace=False):
+    if not os.path.isdir(src):
+        print(f"Nothing to sync: {src} does not exist")
+        return 0
+    os.makedirs(dst, exist_ok=True)
+    taken = set(all_ids(dst)) if not replace else set()
+    added = updated = 0
+    for fn in sorted(os.listdir(src)):
+        if not fn.endswith(".md"):
+            continue
+        role = fn[:-3]
+        srows = rows(read(os.path.join(src, fn)))
+        dp = path_for(dst, role)
+        drows = [] if replace else rows(read(dp))
+        for r in srows:
+            r = list(r)
+            same = next((d for d in drows if norm(d[4]) == norm(r[4])), None)
+            if same:
+                h = max(int(x) if x.isdigit() else 1 for x in (same[6], r[6]))
+                if str(h) != same[6]:
+                    same[6] = str(h)
+                    updated += 1
+                continue
+            if r[0] in taken:
+                r[0] = next_id_from(taken, "G")
+            taken.add(r[0])
+            drows.append(r)
+            added += 1
+        write_rows(dp, role, drows)
+    if replace:
+        keep = {fn for fn in os.listdir(src) if fn.endswith(".md")}
+        for fn in os.listdir(dst):
+            if fn.endswith(".md") and fn not in keep:
+                os.remove(os.path.join(dst, fn))
+    print(f"SYNC {src} -> {dst}: {added} added, {updated} updated" + (" (replace)" if replace else ""))
+    return 0
+
+
+def next_id_from(ids, prefix):
+    nums = [int(m.group(1)) for i in ids if (m := re.match(prefix + r"-(\d+)$", i))]
+    return f"{prefix}-{(max(nums) + 1 if nums else 1):03d}"
+
+
+def cmd_export(a):
+    return merge_dir(GLOBAL_DIR, os.path.abspath(a.root), a.replace)
+
+
+def cmd_import(a):
+    return merge_dir(os.path.abspath(a.root), GLOBAL_DIR)
+
+
 def cmd_stats(a):
     for scope, d in (("project", store(a.root, False)), ("global", GLOBAL_DIR)):
         if not os.path.isdir(d):
@@ -192,11 +246,13 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("list", "add", "bump", "promote", "stats"):
+    for name in ("list", "add", "bump", "promote", "stats", "export", "import"):
         s = sub.add_parser(name)
         s.add_argument("root", nargs="?", default=".")
-        if name != "stats":
+        if name not in ("stats", "export", "import"):
             s.add_argument("--role", required=True)
+        if name == "export":
+            s.add_argument("--replace", action="store_true")
         if name == "list":
             s.add_argument("--tags")
             s.add_argument("--limit", type=int, default=25)
@@ -211,7 +267,8 @@ def main():
             s.add_argument("--global", dest="glob", action="store_true")
     a = ap.parse_args()
     return {"list": cmd_list, "add": cmd_add, "bump": cmd_bump,
-            "promote": cmd_promote, "stats": cmd_stats}[a.cmd](a)
+            "promote": cmd_promote, "stats": cmd_stats,
+            "export": cmd_export, "import": cmd_import}[a.cmd](a)
 
 
 if __name__ == "__main__":

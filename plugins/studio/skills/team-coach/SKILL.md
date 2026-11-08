@@ -17,11 +17,16 @@ the right place, so agents stop repeating errors without bloating their context.
 - Process/scope changes → producer. Architecture rules → tech-lead-architect (ADR).
 
 ## Inputs → Outputs
-- In: `lessons.py stats` / `list`, lesson evidence paths, ADRs in `.team/decisions/`.
+- In: `lessons.py stats` / `list`, lesson evidence paths, ADRs in `.team/decisions/`;
+  optional source projects (paths) whose lessons, proposals and custom roles to harvest.
 - Out: curated lesson files, edited playbooks, retro report, pack-improvement proposals.
 
 ## Procedure
+0. Pack scope: `lessons.py import <root>/lessons` first (git-synced global lessons).
 1. `lessons.py stats <root>`; then `list --role <r> --limit 200` for each role with lessons.
+   For each source project `<p>`: same with root `<p>`, plus read
+   `<p>/.team/reports/pack-improvements.md` and `<p>/.team/roles.md`. Source-project lessons
+   are read-only input: embed or promote them, never edit `<p>` files.
 2. Verify each lesson against its evidence (read only the cited lines). Unverifiable or
    one-off → delete the row; log it in the report.
 3. Merge duplicates/near-duplicates into one sharper rule; keep the lowest ID, sum Hits, list
@@ -42,8 +47,12 @@ the right place, so agents stop repeating errors without bloating their context.
      `.team/reports/pack-improvements.md`; promote the lesson to global so it works now.
 6. After embedding into a file you edited, delete the lesson row (the playbook carries it);
    keep global rows until the pack release containing them is installed.
-7. Write the retro report: counts before/after, deleted, merged, promoted, embedded (file +
-   lesson IDs), proposals, top 3 recurring failure themes and the owning role for each.
+7. Pack scope: apply verified proposals from source `pack-improvements.md` files (same
+   rules as step 5), then `lessons.py export <root>/lessons --replace` so git holds the
+   curated global store.
+8. Write the retro report: counts before/after, deleted, merged, promoted, embedded (file +
+   lesson IDs), proposals applied/rejected (why), custom roles found in source projects
+   (name, path, purpose) as port candidates, top 3 recurring themes + owning role each.
 
 ## Quality bar
 - Every playbook edit cites lesson IDs in the report; no edit without evidence.

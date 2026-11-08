@@ -40,6 +40,9 @@ studio standard - never duplicate an existing role.
 8. Pack scope only: add the role to the orchestrator routing table, AUTHORING.md Roster,
    `ROSTER` in `tests/validate_pack.py`, README team table; run `python tests/validate_pack.py --strict`.
 9. Register in `.team/roles.md`; return with activation note (below).
+- **Port mode** (pack scope, given a source project path): copy that project's
+  `.claude/agents/<role>.md` + `.claude/skills/<role>/`, adapt to AUTHORING.md (preload
+  `team-protocol` via `skills:`), skip steps 4-6 unless the role overlaps a pack role, do step 8.
 
 ## Activation (tell the caller)
 - Project agents load at session start: the user runs `/agents` or restarts, then dispatch

@@ -2,21 +2,24 @@
 name: retro
 description: Run a studio retro - curate the lessons log of agent mistakes and update agent playbooks so errors are not repeated.
 disable-model-invocation: true
-argument-hint: "[role or focus, optional]"
+argument-hint: "[role] [from <project path> ...]"
 ---
 # /studio:retro - learn from mistakes
-Focus: $ARGUMENTS
+Arguments: $ARGUMENTS (optional focus role; `from` + project paths to harvest)
 
 Follow `studio:team-protocol`. Reply in the user's language.
 
 1. **Snapshot (main thread)**: `python "${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/lessons.py" stats <root>`.
-   No lessons anywhere → tell the user and stop (nothing to learn from yet).
-2. **Coach** → `team-coach`: curate project + global lessons (focus role if given), embed
-   recurring/S1 rules into playbooks by scope, write `.team/reports/retro-<date>.md`
-   (+ `.team/reports/pack-improvements.md` when studio roles need pack changes).
-3. **Gap** → if the coach reports a missing specialty, offer `team-recruiter` to the user;
-   don't spawn it without a concrete need.
+   Pack scope = `<root>/plugins/studio/AUTHORING.md` exists (also check `<root>/lessons/`).
+   No lessons anywhere and no source projects → tell the user and stop.
+2. **Coach** → `team-coach`: curate project + global lessons (focus role if given) and the
+   source projects, embed recurring/S1 rules into playbooks by scope, write
+   `.team/reports/retro-<date>.md` (+ `pack-improvements.md` outside pack scope).
+3. **Port roles** (pack scope): if the report lists custom roles from source projects, ask
+   the user which to add to the pack; for each chosen one spawn `team-recruiter` in port
+   mode with the source path. Missing specialty reported → offer `team-recruiter`.
 4. **Report** (≤ 10 lines): lessons before → after, rules embedded (role: rule), promoted to
-   global, top recurring themes, pack proposals path. If the project is the pack source repo,
-   remind the user to review the diff and commit; otherwise suggest sending
-   `pack-improvements.md` to the pack maintainer.
+   global, top recurring themes, pack proposals path. Pack scope: remind the user to review
+   `git diff` (playbooks + `lessons/`), bump `plugin.json` version, commit and push, then
+   `claude plugin marketplace update studio-market`. Otherwise suggest running
+   `/studio:retro from <this project>` in the pack repo.
