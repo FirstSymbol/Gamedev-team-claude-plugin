@@ -82,7 +82,9 @@ Sonnet по спекам от tech-lead на Opus. Для сложных зад�
 
 Общие скиллы: `team-protocol` (правила команды, подгружается в каждого агента),
 `stack-unity`, `stack-dotnet`, `domain-igaming`, `domain-f2p-liveops`,
-`domain-multiplayer`, `domain-pc-console`.
+`domain-multiplayer`, `domain-pc-console`, `unity-performance` (методика оптимизации Unity:
+профилирование, A/B-замеры, перф-тесты и CI-гейты, GC/память, Burst/Jobs, IL2CPP, мобильный
+нагрев; подгружается в unity-developer, technical-artist, qa-engineer).
 
 ## Существующий проект: /studio:onboard
 
@@ -197,6 +199,20 @@ python plugins/studio/skills/team-protocol/scripts/lessons.py export lessons   #
 Папка `.team/` этого репозитория добавлена в `.gitignore`: рабочие отчёты retro в коммит
 не попадают.
 
+**Индекс переносов: старые уроки повторно не читаются.** Исходные проекты retro не меняет.
+Вместо этого коуч отмечает каждый обработанный урок в `~/.claude/studio/lessons/_harvested.md`
+(в git это `lessons/_harvested.md`): проект, роль, номер, `Hits` на момент переноса, итог
+(`embedded`, `global`, `project`, `covered` или `dropped`) и ссылку на глобальное правило.
+
+| Команда | Что делает |
+|---|---|
+| `lessons.py pending <проект>` | показывает только новые уроки и те, у которых вырос `Hits` (ошибка повторилась) |
+| `lessons.py mark <проект> --id L-1,L-2 --outcome global --ref G-012` | записывает урок в индекс |
+| `lessons.py list` в самом проекте | скрывает уроки, которые уже перенесены в пак или глобальные, чтобы агенты не читали одно правило дважды |
+
+Проект опознаётся по адресу git-репозитория (`origin`), а если его нет, то по пути. Поэтому
+после `import` индекс работает и на другой машине, если проект там тоже под git.
+
 ## Новые роли: team-recruiter
 
 Если задаче нужен специалист, которого нет в составе, оркестратор зовёт `team-recruiter`.
@@ -256,7 +272,7 @@ plugins/studio/
   skills/<роль>/templates/*.md      шаблоны артефактов
   skills/team-protocol/scripts/     сканеры проекта, статус команды и кэша, журнал уроков (lessons.py)
   skills/onboard/templates/         шаблон карты проекта (project-map.md)
-lessons/                            глобальные уроки команды в git (export/import)
+lessons/                            глобальные уроки команды и индекс переносов в git (export/import)
 tests/
   validate_pack.py                  проверка структуры и бюджетов
   run_triggers.py + trigger_cases.json   проверка маршрутизации (RU/EN запросы)
@@ -270,6 +286,17 @@ python tests/validate_pack.py --strict              # структура, бюд
 claude plugin validate "plugins/studio"             # официальный валидатор
 python tests/run_triggers.py --jobs 4               # маршрутизация (тратит токены)
 ```
+
+Результаты на 2026-11-10 (v1.4.0):
+- Первый настоящий retro: 102 урока из Unity-проекта плагинов. 82 стали 75 глобальными
+  правилами, 31 вписан в плейбуки 8 ролей, 16 проектных уроков остались в проекте, 4 уже
+  были в паке. Индекс переносов: 102 из 102 отмечены.
+- Новый общий скилл `unity-performance` (6 справочников), его подгружают unity-developer,
+  technical-artist и qa-engineer.
+- Проверки: `validate_pack.py --strict` и `claude plugin validate` дают 0 ошибок и
+  0 предупреждений (47 скиллов, 30 агентов). Индекс переносов проверен в песочнице: отметки,
+  `pending`, скрытие в `list`, повторное появление при росте `Hits`, синхронизация на вторую
+  машину.
 
 Результаты на 2026-11-08 (v1.3.0):
 - `validate_pack.py --strict` и `claude plugin validate`: 0 ошибок, 0 предупреждений

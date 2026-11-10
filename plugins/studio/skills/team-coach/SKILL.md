@@ -26,8 +26,10 @@ the right place, so agents stop repeating errors without bloating their context.
 ## Procedure
 0. Pack scope: `lessons.py import <root>/lessons` first (git-synced global lessons).
 1. `stats <root>`; `list --role <r> --no-common --limit 200` per role (+ once `--role common`).
-   Source project `<p>`: same with root `<p>`, plus `<p>/.team/reports/pack-improvements.md`
-   and `<p>/.team/roles.md`. Sources are read-only: never edit `<p>` or source files.
+   Source project `<p>`: `pending <p>` (only rows never harvested or whose Hits grew; skip
+   the rest), plus `<p>/.team/reports/pack-improvements.md` and `<p>/.team/roles.md`.
+   Sources are read-only: never edit `<p>`. Generic source row → `add --global`, evidence
+   `src: <p>:<ID>`; Hits grew on a harvested row → `bump` its global row (Ref in the index).
 1b. Free-form file `<f>`: read whole (> 1500 lines → Grep error/bug/fix/mistake keywords in
    its language, read hits ± 10 lines). Per mistake + fix: rule "Do X when Y"; role = author
    role, else the role owning that code area, else `common`; record with `add`, evidence
@@ -54,8 +56,10 @@ the right place, so agents stop repeating errors without bloating their context.
      lesson IDs) to `pack-improvements.md` and `promote` so it works now.
 6. After an embedding edit exists (yours or pre-existing), `delete` the project row; keep
    global rows until the pack release with the rule is installed.
-7. Pack scope: apply verified source `pack-improvements.md` proposals (step 5 rules), then
-   `lessons.py export <root>/lessons --replace`.
+7. Index every processed source row: `mark <p> --id <IDs> --outcome embedded|global|project|
+   covered|dropped [--ref G-NNN]` (next retro skips them; `list` in `<p>` hides carried ones).
+   Pack scope: apply verified source `pack-improvements.md` proposals (step 5 rules), then
+   `lessons.py export <root>/lessons --replace` (also syncs the harvest index).
 8. Retro report: counts before/after; deleted (reason), merged, moved, promoted, embedded
    (file + IDs); per source file: extracted / rewritten / skipped (why) / secrets found
    (location only); proposals applied/rejected; custom roles in sources (port candidates);

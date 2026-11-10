@@ -39,7 +39,8 @@ instead of restating engine facts.
 - **Asset Serialization = Force Text** and Visible Meta Files (VCS-friendly; see vcs ref).
 - **Serialization basics**: fields that are `public` or `[SerializeField]`, non-static,
   non-readonly; no properties (use `[field: SerializeField]`), no `Dictionary` before 6.6, no
-  polymorphism without `[SerializeReference]`; renames need `[FormerlySerializedAs]`.
+  polymorphism without `[SerializeReference]`; renames need `[FormerlySerializedAs]`. One
+  MonoBehaviour/ScriptableObject per file, named like it (else `m_Script` fileID 0 = missing script).
 - **Main thread**: all `UnityEngine.Object` APIs on the main thread only. Background work =
   plain C#, Jobs/Burst on NativeContainers, or `Awaitable.BackgroundThreadAsync()` then back.
 - **Unity null**: destroyed objects `== null` but are not C# null; never `?.`/`??`/`is null`
@@ -49,7 +50,11 @@ instead of restating engine facts.
 - **Scene/prefab YAML**: do not hand-edit beyond trivial scalar fields; use editor scripts
   (`-executeMethod`) or give exact Editor steps.
 - **Verification without GUI**: compile + tests via batch mode; read `Editor.log`
-  (references/ai-tooling.md). Never claim "works" without a log or test result.
+  (references/ai-tooling.md). Never claim "works" without a log or test result. After a
+  recompile confirm it succeeded before testing (stale assemblies); visual changes (shaders,
+  layout, text) need a player screenshot of a dev scene.
+- **The human's open editor is off-limits**: no tests, restarts or `EditorApplication.Exit` in
+  it; use a separate batch-mode editor on a clean sandbox copy. Save modal → press only Cancel.
 - **Discovery**: run team-protocol `scan_unity_project.py` before reading project files.
 
 ## References (read on demand)

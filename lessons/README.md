@@ -6,3 +6,5 @@ Curated global lessons of the studio team, one table per role. The live store is
 - New machine / teammate: `python plugins/studio/skills/team-protocol/scripts/lessons.py import lessons`
 - Back up after work: `python plugins/studio/skills/team-protocol/scripts/lessons.py export lessons`
 - `/studio:retro` in this repo imports, curates and exports (`--replace`) automatically.
+- `_harvested.md` is the harvest index: source-project rows already processed by a retro
+  (`lessons.py pending <project>` skips them; `list` in that project hides carried rows).

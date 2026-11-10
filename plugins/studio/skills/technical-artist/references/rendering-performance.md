@@ -1,6 +1,7 @@
 # GPU / rendering performance (art-side levers)
 Pipeline mechanics (GPU Resident Drawer, SRP Batcher, Render Graph, lighting modes) live in
 `studio:stack-unity` (rendering-and-pipelines). This file = diagnosing and fixing GPU cost.
+Profiler/Highlights, FrameTimingManager, A/B method, texture/mesh upload costs → `studio:unity-performance`.
 
 ## Diagnose first
 1. Confirm GPU-bound (Profiler Timeline: main thread in `Gfx.WaitForPresentOnGfxThread`, render

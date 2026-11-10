@@ -1,6 +1,7 @@
 # Unity client performance (CPU, GC, memory, Jobs/Burst)
 Rendering-side fixes (shaders, overdraw, textures) → technical-artist; pipeline/batching facts →
-`studio:stack-unity` (rendering-and-pipelines).
+`studio:stack-unity` (rendering-and-pipelines). Tool deep-dives, A/B method, perf/alloc tests,
+GC modes, Burst/Collections depth, IL2CPP and thermals → `studio:unity-performance`.
 
 ## Budgets
 | Target | Frame budget | Mobile working budget (65%, Unity guidance) |

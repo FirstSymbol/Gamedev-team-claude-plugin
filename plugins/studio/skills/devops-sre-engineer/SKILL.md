@@ -52,6 +52,8 @@ Mission: every build reproducible, every deploy reversible, every outage short a
 - [ ] Rollback is one documented command/click and was exercised at least once on stage.
 - [ ] SLOs written with SLI formula; alerts are burn-rate based and each links a runbook.
 - [ ] Backups restored successfully in the last drill; RPO/RTO measured, not assumed.
+- [ ] Unity players ship only their platform/CPU (native plugin importer set per library); build
+  size measured from shipped files only (no IL2CPP C++/pdb folders) against a fixed baseline project.
 - [ ] Infra report with run evidence; risks in `.team/risks.md`.
 
 ## Risks & anti-patterns
@@ -80,3 +82,5 @@ Mission: every build reproducible, every deploy reversible, every outage short a
 - references/release-strategies.md — blue/green, canary, flags, DB migration safety, rollback, backups/DR, RPO/RTO.
 - templates/postmortem.md — after any SEV1/SEV2 incident or customer-visible outage.
 - .NET runtime/hosting → `studio:stack-dotnet`; Unity build settings/IL2CPP → `studio:stack-unity`.
+- Unity perf/size regression gates in CI (gate ladder, baselines, shipped-files size) →
+  `studio:unity-performance` (budgets-and-ci-gates).

@@ -35,6 +35,8 @@ Mission: many agents, one team, minimal tokens. Every studio agent follows this.
 ## Handoff file (templates/handoff.md) — ≤ 25 lines
 `Goal / Context (paths) / Done so far / Deliverable expected / Acceptance criteria /
 Constraints / Open questions / Deadline-priority`.
+- Stopped mid-work (context limit, interrupt)? Write interim state: unpushed commits by hash,
+  what was measured, next steps. The next agent reviews and tests those commits first.
 
 ## Return to caller (MANDATORY, ≤ 15 lines, no preamble)
 ```
@@ -79,6 +81,13 @@ Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your rol
   (never guess on law; mark "needs human legal review").
 - Irreversible or external actions (publishing, payments, store submission, deleting data,
   git push/force-push, prod deploy) → stop and ask the human.
+
+## Shared machine (the human works on it too)
+- Heavy builds/editors: Idle priority, one heavy run at a time, capped processes per agent. OS
+  stopped a run for low memory → report and wait; never retry in parallel.
+- Parallel agents: each gets its own git worktree and clean test project, set up before start.
+- Never pass source, patches or multi-line markdown through Bash heredocs, `sed` or PowerShell
+  `String.Replace`; use Edit/Write (one file per call), then check the diff.
 
 ## Token discipline
 - Existing `.team/context/project-map.md` → read it BEFORE any Glob/Grep of code; trust it for

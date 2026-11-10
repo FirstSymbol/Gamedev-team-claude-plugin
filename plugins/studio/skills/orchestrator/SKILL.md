@@ -13,8 +13,7 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
    verbatim + any paths; the specialist does its own discovery). M → specialists in dependency
    order (parallel when independent). L → the relevant LEAD(s); leads spawn their own
    specialists and return summaries. Never spawn a role whose output nobody consumes.
-   Do NOT browse or read project code in the main thread to "understand" it — that is the
-   specialists' job and costs main-thread context.
+   Do NOT read project code in the main thread; specialists do discovery.
 3. **Prepare (M/L only)**: `python "${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/team_status.py" <root> --init`,
    write/refresh `.team/brief.md` (≤ 10 lines). Existing code, no `.team/context/` → suggest
    `/studio:onboard` (cached context); with it, pass `project-map.md` to agents. Else run `scan_unity_project.py` /
@@ -45,7 +44,7 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
 | Mechanics, systems, core loop, balancing | game-designer |
 | Levels, encounters, pacing, blockouts | level-designer |
 | Story, quests, dialogue, lore, UI text, loc-ready copy | narrative-designer |
-| Virtual economy, monetization, pricing, casino math/RTP, slot PAR sheets | economy-monetization-designer (+ compliance-advisor for certification prep) |
+| Virtual economy, monetization, pricing, casino math/RTP, slot PAR sheets | economy-monetization-designer (+ compliance-advisor for certification) |
 | UX flows, wireframes, UI specs, accessibility | ux-ui-designer |
 | Visual/audio direction, style guide, asset briefs | art-director |
 | Shaders, VFX, rendering perf, asset pipeline/import | technical-artist |
@@ -64,7 +63,7 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
 | Docs, README, changelog, release notes, API docs | technical-writer |
 | No role fits; add a specialist (custom role) | team-recruiter |
 | Retro, recurring agent mistakes, playbook updates from lessons | team-coach |
-| Custom roles listed in `.team/roles.md` | `<role>` (no `studio:` prefix) |
+| Custom roles in `.team/roles.md` | `<role>` (no `studio:` prefix) |
 
 ## Standard pipelines (also as commands)
 - Feature: (BA|GD) spec → system-analyst contract (if API) → UX (if UI) → engineers
@@ -85,6 +84,7 @@ Mission: turn a request into the smallest set of agent tasks that delivers it, k
 - F2P mobile, IAP, ads, events, battle pass, retention → `studio:domain-f2p-liveops`.
 - Multiplayer, realtime, server authority, matchmaking → `studio:domain-multiplayer`.
 - Steam, consoles, certification, porting → `studio:domain-pc-console`.
+- Unity perf (frame time, GC, Burst, build size) → `studio:unity-performance`.
 
 ## Rules
 - Prefer direct specialist over lead for S/M work (leads cost opus tokens).

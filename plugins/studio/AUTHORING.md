@@ -16,12 +16,13 @@ plugins/studio/
   skills/<role>/templates/*.md     # artifact templates (optional)
 ```
 Shared skills: `team-protocol`, `orchestrator`, `stack-unity`, `stack-dotnet`,
-`domain-igaming`, `domain-f2p-liveops`, `domain-multiplayer`, `domain-pc-console`.
+`domain-igaming`, `domain-f2p-liveops`, `domain-multiplayer`, `domain-pc-console`,
+`unity-performance` (cross-role perf method; preloaded by unity-developer, technical-artist, qa-engineer).
 Do NOT duplicate shared knowledge in role skills — link to it by skill + topic name, never by
 path: "see `studio:stack-unity` (addressables-and-assets)". Paths like `references/x.md` in a
 SKILL.md always mean files of THAT skill (the validator checks them).
-Shared knowledge skills (stack-*, domain-*) use sections: Mission / Version baseline (stack) or
-Key concepts (domain) / Rules that always apply / References (read on demand).
+Shared knowledge skills (stack-*, domain-*, unity-performance) use sections: Mission / Version
+baseline (stack) or Key concepts (domain, unity-performance) / Rules that always apply / References (read on demand).
 
 ## SKILL.md (role) — budget: ≤ 130 lines, ≤ 7,000 chars (validator limits; aim lower)
 Frontmatter:

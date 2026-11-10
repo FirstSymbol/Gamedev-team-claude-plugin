@@ -14,7 +14,8 @@ Follow `studio:team-protocol`. Reply in the user's language.
    Each `from` path: folder = source project, file = free-form notes (any format).
    Missing path → tell the user. No lessons anywhere and no sources → tell the user and stop.
 2. **Coach** → `team-coach`: curate project + global lessons (focus role if given), the
-   source projects and free-form files (pass each path with its kind), embed recurring/S1 rules into playbooks by scope, write
+   source projects (only `lessons.py pending` rows; harvested ones are indexed and skipped)
+   and free-form files (pass each path with its kind), embed recurring/S1 rules into playbooks by scope, write
    `.team/reports/retro-<date>.md` (+ `pack-improvements.md` outside pack scope).
 3. **Port roles** (pack scope): if the report lists custom roles from source projects, ask
    the user which to add to the pack; for each chosen one spawn `team-recruiter` in port

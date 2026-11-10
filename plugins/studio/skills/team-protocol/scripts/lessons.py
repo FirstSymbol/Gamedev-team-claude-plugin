@@ -17,13 +17,19 @@ Usage:
   python lessons.py move   <root> --id <ID> --role <role> --to <role> [--global]
   python lessons.py export <dir> [--replace]   global store -> <dir> (backup / git sync)
   python lessons.py import <dir>               <dir> -> global store (new machine / teammate)
+  python lessons.py pending <source root>                 source rows not yet harvested (or Hits grew)
+  python lessons.py mark <source root> --id L-1,L-2 --outcome <embedded|global|project|covered|dropped> [--ref G-012]
 export/import merge by rule text (Hits = max, never summed), so repeated syncs are idempotent.
 --replace makes <dir> an exact copy of the global store (use after curation deleted rows).
+Harvest index (~/.claude/studio/lessons/_harvested.md, synced by export/import): which source
+project rows a retro already processed. `list` in that project hides rows carried elsewhere
+(embedded/global/covered/dropped) until their Hits grow; `pending` shows only unprocessed rows.
 """
 import argparse
 import datetime
 import os
 import re
+import subprocess
 import sys
 
 HEADER = ("# Lessons: {role}\n"
@@ -31,6 +37,12 @@ HEADER = ("# Lessons: {role}\n"
           "|---|---|---|---|---|---|---|\n")
 GLOBAL_DIR = os.path.join(os.path.expanduser("~"), ".claude", "studio", "lessons")
 MAX_RULE = 220
+INDEX = "_harvested.md"
+INDEX_HEADER = ("# Harvest index (written by team-coach via `lessons.py mark`)\n"
+                "| Project | Role | ID | Hits | Outcome | Ref | Date |\n"
+                "|---|---|---|---|---|---|---|\n")
+OUTCOMES = ("embedded", "global", "project", "covered", "dropped")
+HIDDEN = {"embedded", "global", "covered", "dropped"}
 
 
 def store(root, glob):
@@ -39,6 +51,10 @@ def store(root, glob):
 
 def path_for(d, role):
     return os.path.join(d, f"{role}.md")
+
+
+def is_role_file(fn):
+    return fn.endswith(".md") and fn.lower() != "readme.md" and not fn.startswith("_")
 
 
 def read(p):
@@ -71,7 +87,7 @@ def all_ids(d):
     ids = []
     if os.path.isdir(d):
         for fn in os.listdir(d):
-            if fn.endswith(".md"):
+            if is_role_file(fn):
                 ids += [r[0] for r in rows(read(os.path.join(d, fn)))]
     return ids
 
@@ -88,7 +104,55 @@ def norm(s):
     return re.sub(r"[^a-z0-9 ]", "", s.lower())
 
 
+def project_keys(root):
+    root = os.path.abspath(root)
+    keys = {root.replace("\\", "/").rstrip("/").lower()}
+    try:
+        r = subprocess.run(["git", "-C", root, "remote", "get-url", "origin"],
+                           capture_output=True, text=True, timeout=10)
+        url = r.stdout.strip() if r.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        url = ""
+    if url:
+        url = re.sub(r"^(https?://|ssh://|git@)", "", url.lower()).replace(":", "/")
+        keys.add("git:" + re.sub(r"\.git$", "", url).rstrip("/"))
+    return keys
+
+
+def index_rows(d=None):
+    out = []
+    for line in read(os.path.join(d or GLOBAL_DIR, INDEX)).splitlines():
+        if line.startswith("| ") and not line.startswith("| Project") and not line.startswith("|---"):
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) >= 7:
+                out.append(cells[:7])
+    return out
+
+
+def write_index(rs, d=None):
+    d = d or GLOBAL_DIR
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, INDEX), "w", encoding="utf-8") as f:
+        f.write(INDEX_HEADER)
+        for r in sorted(rs, key=lambda x: (x[0], x[1], x[2])):
+            f.write("| " + " | ".join(r) + " |\n")
+
+
+def harvested(root):
+    keys = project_keys(root)
+    return {(r[1], r[2]): r for r in index_rows() if r[0] in keys}
+
+
+def hits(r):
+    return int(r[6]) if r[6].isdigit() else 1
+
+
+def is_hidden(entry, row):
+    return entry is not None and entry[4] in HIDDEN and hits(row) <= (int(entry[3]) if entry[3].isdigit() else 1)
+
+
 def cmd_list(a):
+    done = harvested(a.root)
     want = {t.strip().lower() for t in (a.tags or "").split(",") if t.strip()}
     found = []
     for scope, d in (("global", GLOBAL_DIR), ("project", store(a.root, False))):
@@ -98,6 +162,8 @@ def cmd_list(a):
                 if role == "common" and a.no_common and a.role != "common":
                     continue
                 if want and not (want & tags) and role != "common":
+                    continue
+                if scope == "project" and is_hidden(done.get((role, r[0])), r):
                     continue
                 found.append((scope, role, r))
     if not found:
@@ -215,6 +281,68 @@ def cmd_move(a):
     return 0
 
 
+def source_rows(root):
+    d = store(root, False)
+    out = []
+    if os.path.isdir(d):
+        for fn in sorted(os.listdir(d)):
+            if is_role_file(fn):
+                out += [(fn[:-3], r) for r in rows(read(os.path.join(d, fn)))]
+    return out
+
+
+def cmd_pending(a):
+    done = harvested(a.root)
+    allr = source_rows(a.root)
+    todo = []
+    for role, r in allr:
+        e = done.get((role, r[0]))
+        if e is None:
+            todo.append(("new", role, r))
+        elif hits(r) > (int(e[3]) if e[3].isdigit() else 1):
+            todo.append((f"hits {e[3]}->{r[6]}, was {e[4]}", role, r))
+    print(f"## Pending in {a.root}: {len(todo)} of {len(allr)} rows ({len(allr) - len(todo)} already harvested)")
+    for why, role, r in todo:
+        print(f"- {role} {r[0]} [{r[2]}|{r[3]}|x{r[6]}] ({why}) {r[4]}")
+    return 0
+
+
+def cmd_mark(a):
+    if a.outcome not in OUTCOMES:
+        print(f"ERROR: --outcome must be one of {', '.join(OUTCOMES)}")
+        return 1
+    keys = project_keys(a.root)
+    key = next((k for k in sorted(keys) if k.startswith("git:")), None) or next(iter(keys))
+    src = {r[0]: (role, r) for role, r in source_rows(a.root)}
+    idx = [r for r in index_rows()]
+    today = datetime.date.today().isoformat()
+    marked = 0
+    for lid in [x.strip() for x in a.id.split(",") if x.strip()]:
+        if lid not in src:
+            print(f"ERROR: {lid} not found in {store(a.root, False)}")
+            return 1
+        role, r = src[lid]
+        idx = [x for x in idx if not (x[0] in keys and x[1] == role and x[2] == lid)]
+        idx.append([key, role, lid, r[6], a.outcome, clean(a.ref or "-"), today])
+        marked += 1
+    write_index(idx)
+    print(f"MARKED {marked} row(s) as {a.outcome} for {key}")
+    return 0
+
+
+def merge_index(src, dst, replace=False):
+    srows = index_rows(src)
+    if not srows and not replace:
+        return
+    merged = {} if replace else {(r[0], r[1], r[2]): r for r in index_rows(dst)}
+    for r in srows:
+        k = (r[0], r[1], r[2])
+        if k not in merged or r[6] >= merged[k][6]:
+            merged[k] = r
+    if merged or os.path.exists(os.path.join(dst, INDEX)):
+        write_index(list(merged.values()), dst)
+
+
 def merge_dir(src, dst, replace=False):
     if not os.path.isdir(src):
         print(f"Nothing to sync: {src} does not exist")
@@ -223,7 +351,7 @@ def merge_dir(src, dst, replace=False):
     taken = set(all_ids(dst)) if not replace else set()
     added = updated = 0
     for fn in sorted(os.listdir(src)):
-        if not fn.endswith(".md"):
+        if not is_role_file(fn):
             continue
         role = fn[:-3]
         srows = rows(read(os.path.join(src, fn)))
@@ -245,10 +373,11 @@ def merge_dir(src, dst, replace=False):
             added += 1
         write_rows(dp, role, drows)
     if replace:
-        keep = {fn for fn in os.listdir(src) if fn.endswith(".md")}
+        keep = {fn for fn in os.listdir(src) if is_role_file(fn)}
         for fn in os.listdir(dst):
-            if fn.endswith(".md") and fn not in keep:
+            if is_role_file(fn) and fn not in keep:
                 os.remove(os.path.join(dst, fn))
+    merge_index(src, dst, replace)
     print(f"SYNC {src} -> {dst}: {added} added, {updated} updated" + (" (replace)" if replace else ""))
     return 0
 
@@ -273,11 +402,14 @@ def cmd_stats(a):
             continue
         parts = []
         for fn in sorted(os.listdir(d)):
-            if fn.endswith(".md"):
+            if is_role_file(fn):
                 rs = rows(read(os.path.join(d, fn)))
                 rep = sum(1 for r in rs if r[6].isdigit() and int(r[6]) > 1)
                 parts.append(f"{fn[:-3]}={len(rs)}" + (f"({rep} recurring)" if rep else ""))
         print(f"{scope}: " + (", ".join(parts) or "none"))
+    done = harvested(a.root)
+    if done:
+        print(f"harvest index for this project: {len(done)} rows processed by retro")
     return 0
 
 
@@ -286,11 +418,16 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("list", "add", "bump", "promote", "stats", "export", "import", "delete", "move"):
+    for name in ("list", "add", "bump", "promote", "stats", "export", "import", "delete", "move",
+                 "pending", "mark"):
         s = sub.add_parser(name)
         s.add_argument("root", nargs="?", default=".")
-        if name not in ("stats", "export", "import"):
+        if name not in ("stats", "export", "import", "pending", "mark"):
             s.add_argument("--role", required=True)
+        if name == "mark":
+            s.add_argument("--id", required=True)
+            s.add_argument("--outcome", required=True)
+            s.add_argument("--ref")
         if name == "export":
             s.add_argument("--replace", action="store_true")
         if name == "list":
@@ -314,7 +451,8 @@ def main():
     return {"list": cmd_list, "add": cmd_add, "bump": cmd_bump,
             "promote": cmd_promote, "stats": cmd_stats,
             "export": cmd_export, "import": cmd_import,
-            "delete": cmd_delete, "move": cmd_move}[a.cmd](a)
+            "delete": cmd_delete, "move": cmd_move,
+            "pending": cmd_pending, "mark": cmd_mark}[a.cmd](a)
 
 
 if __name__ == "__main__":

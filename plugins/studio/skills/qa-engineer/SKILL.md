@@ -43,6 +43,9 @@ Mission: find the defects that matter before players do, and prove fixes with re
 - [ ] Server-side checks for money/rewards (not UI-only); exploit cases for economy features.
 - [ ] Bug reports reproducible by someone else from the text alone; environment + build ID included.
 - [ ] Results reported from runner output (XML/TRX), never "looks fine"; flaky tests flagged, not ignored.
+- [ ] Perf verdicts: fresh IL2CPP release builds of A and B (old build folders deleted) run
+  alternately in one session, median of 5+ runs; counters from a dev build; every regressed row
+  reported; harness changes applied to all sides and documented.
 - [ ] Test code follows project style; no secrets in test configs; test data generators, not prod data.
 
 ## Risks & anti-patterns
@@ -54,6 +57,10 @@ Mission: find the defects that matter before players do, and prove fixes with re
 - Vague bug titles ("shop broken") → triage waste; title = where + what + when.
 - Retesting only the fix → regressions slip; run impacted-area regression.
 - Test data shared across tests/envs → cascading failures; create per test, unique IDs.
+- Perf scatter or a bisect jumping across unrelated commits → incremental GC; settle each row
+  (collect + 10 idle frames), confirm by disabling incremental GC.
+- Alloc test reads 0 (`GC.GetAllocatedBytesForCurrentThread` on Unity Mono) → `ProfilerRecorder`
+  "GC Allocated In Frame"; assert a control allocation registers first.
 
 ## Handoffs
 - → qa-lead: test-run report, risk observations, flaky list, coverage gaps.
@@ -70,3 +77,4 @@ Mission: find the defects that matter before players do, and prove fixes with re
 - templates/test-plan.md — when qa-lead asks for a plan draft. templates/test-cases.md — any test case suite.
 - templates/bug-report.md — every bug filed to `.team/reports/`.
 - Engine/stack facts: `studio:stack-unity` (batch mode, logs), `studio:stack-dotnet` (testing baseline). Strategy/gates: `studio:qa-lead`.
+- Unity perf A/B procedure, perf and allocation tests, CI perf gates → preloaded `studio:unity-performance`.

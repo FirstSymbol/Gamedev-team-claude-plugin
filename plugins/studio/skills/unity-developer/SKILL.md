@@ -35,11 +35,13 @@ Mission: ship maintainable, performant Unity client code that matches the spec a
 ## Quality bar
 - [ ] No logic in MonoBehaviour that can live in plain C#; dependencies injected, not `Find*`.
 - [ ] Serialized fields `[SerializeField] private`; `FormerlySerializedAs` on renames.
-- [ ] No per-frame GC alloc in hot paths (LINQ, boxing, string concat, closures, `GetComponent`).
+- [ ] No per-frame GC alloc in hot paths (LINQ, boxing, string concat, closures, `GetComponent`,
+  per-call array rent). Buffers created lazily, sized to the visible window, not content/scroll.
 - [ ] Events unsubscribed (`OnDisable`/`OnDestroy`); async cancelled on destroy.
 - [ ] `.meta` files kept with assets; GUIDs never regenerated; no edits to `Library/`.
 - [ ] New code in an asmdef with explicit references; test asmdef for tests.
 - [ ] Platform code guarded (`#if UNITY_ANDROID`…); IL2CPP-safe (no unpreserved reflection).
+  Optional modules/packages via asmdef `versionDefines`; per-platform assets/plugins limited by importer.
 - [ ] Tests green; impl report written.
 
 ## Risks & anti-patterns
@@ -50,6 +52,11 @@ Mission: ship maintainable, performant Unity client code that matches the spec a
 - Script execution order dependence; init in `Awake` (self) vs `Start` (others) discipline.
 - IL2CPP stripping kills reflection/serializers → `link.xml` / `[Preserve]`.
 - Physics in `Update`, transforms in `FixedUpdate` mismatches → jitter.
+- Threads with no WebGL path → thread only above a size threshold behind a switch; every
+  threaded path keeps a main-thread fallback time-sliced (~2 ms/frame).
+- Late worker jobs/callbacks acting on a reset batch → tag with a generation counter, drop stale.
+- First-use hitches (IL2CPP type init, first material/Graphic) → warm-up API for loading screens
+  or spread over first frames; costly lookups (system fonts, files) only on a real miss.
 
 ## Handoffs
 - → qa-engineer: impl report + test notes. → code-reviewer: changed files list.
@@ -59,6 +66,8 @@ Mission: ship maintainable, performant Unity client code that matches the spec a
 ## References (read on demand)
 - references/architecture-patterns.md — structuring a feature/system, DI, events, state machines, SO data.
 - references/performance.md — perf or memory issue, GC, profiling, mobile budgets.
+- Deeper perf method (A/B runs, perf/alloc tests, memory/GC model, Burst/Collections, IL2CPP,
+  thermals, Web threads) → preloaded `studio:unity-performance`.
 - references/async-and-lifecycle.md — coroutines vs Awaitable vs UniTask, threading, lifecycle bugs.
 - references/testing-unity.md — writing EditMode/PlayMode tests, mocks, batch-mode runs, CI.
 - references/editor-tooling.md — custom inspectors, editor windows, asset postprocessors, menu tools.

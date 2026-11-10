@@ -52,7 +52,10 @@ pipeline that look right and stay inside measured budgets.
 ## Risks & anti-patterns
 - Shader variant explosion (multi_compile everywhere) → `shader_feature_local`, strip, check build logs.
 - First-use hitches from PSO/shader compile → GraphicsStateCollection trace + warmup at load.
-- Overdraw from big transparent quads/particles → tight meshes, opaque cores, fewer layers.
+- Overdraw from big transparent quads/particles → tight meshes trimmed to visible ink bounds
+  (cull by ink, not quad), opaque cores, fewer layers.
+- "Fewer quads/draws = faster" → extra vertex streams can cost more than the overdraw saved;
+  measure every GPU change; keep special paths in their own shader variant.
 - Uncompressed/oversized textures, Read/Write on → presets + audit in CI.
 - Per-object material copies (`renderer.material`, MaterialPropertyBlock) breaking batching → shared materials, user values.
 - VFX Graph shipped to GLES/low-end mobile → Particle System fallback, capability check.
@@ -75,3 +78,4 @@ pipeline that look right and stay inside measured budgets.
 - references/rendering-performance.md — GPU-bound frames, overdraw, draw calls from art side, lighting/shadow/post cost, GPU tools.
 - references/tooling-automation.md — audits without Unity (.meta parsing), validators, Presets, DCC export, CI gates.
 - Engine-wide facts (pipelines, Render Graph, GPU Resident Drawer, Addressables, VCS/LFS) → skill `studio:stack-unity`.
+- Profiling tools, A/B method, perf budgets/CI gates, texture upload costs → preloaded `studio:unity-performance`.

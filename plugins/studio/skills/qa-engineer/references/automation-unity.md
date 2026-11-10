@@ -168,6 +168,8 @@ public IEnumerator Lobby_FrameTime() {
 }
 ```
 Run on a fixed reference device; compare medians/p95 with previous baseline (±10% gate, see qa-lead gates).
+Full A/B procedure, allocation tests, `-perfTestResults`, baselines and the CI gate ladder:
+`studio:unity-performance` (measurement-methodology, budgets-and-ci-gates).
 
 ## Sources
 - Unity Test Framework manual, command-line reference https://docs.unity3d.com/Packages/com.unity.test-framework@1.4/manual/reference-command-line.html

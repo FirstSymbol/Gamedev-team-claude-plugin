@@ -77,5 +77,6 @@ Mission: the simplest architecture that meets the quality attributes, decided ex
 - references/quality-attributes.md — NFRs (ISO 25010), ATAM-lite trade-offs, scaling/availability tactics, capacity math.
 - references/engineering-standards.md — C#/Unity conventions, .editorconfig/analyzers, branching, reviews, debt, dependencies.
 - references/unity-dotnet-system-design.md — Unity client + ASP.NET Core backend + admin: contracts, auth, config, telemetry, versioning.
-- Stack details → `studio:stack-dotnet`, `studio:stack-unity`; realtime → `studio:domain-multiplayer`;
+- Stack details → `studio:stack-dotnet`, `studio:stack-unity`; perf-budget.md shape, Unity perf
+  gates → `studio:unity-performance` (budgets-and-ci-gates); realtime → `studio:domain-multiplayer`;
   casino wallet/RNG rules → `studio:domain-igaming`.
