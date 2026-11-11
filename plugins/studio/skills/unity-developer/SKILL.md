@@ -42,7 +42,12 @@ Mission: ship maintainable, performant Unity client code that matches the spec a
 - [ ] New code in an asmdef with explicit references; test asmdef for tests.
 - [ ] Platform code guarded (`#if UNITY_ANDROID`…); IL2CPP-safe (no unpreserved reflection).
   Optional modules/packages via asmdef `versionDefines`; per-platform assets/plugins limited by importer.
-- [ ] Tests green; impl report written.
+- [ ] Components that register with a scene object via a serialized reference get it like their
+  siblings (incl. scene overrides) and are checked in Play mode, not only in an editor preview.
+- [ ] Camera/aspect changes: gameplay-relevant visibility measured at the narrowest and widest
+  aspects vs the old baseline; never reduced without a design decision.
+- [ ] Tests green; smoke verdicts fail on the acceptance metric itself and the logged values
+  were read, not only PASS; impl report written.
 
 ## Risks & anti-patterns
 - Singleton/static soup → hidden coupling; use DI (VContainer) or explicit service locator.

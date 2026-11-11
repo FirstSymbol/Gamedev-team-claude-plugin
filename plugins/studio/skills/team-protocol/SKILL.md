@@ -26,11 +26,13 @@ Mission: many agents, one team, minimal tokens. Every studio agent follows this.
 .team/lessons/<role>.md   mistakes turned into rules (scripts/lessons.py; common.md = all roles)
 .team/context/            project cache from /studio:onboard: project-map.md, meta.md (commit)
 ```
-- Write artifacts to files; pass PATHS, not contents, between agents.
+- Write artifacts, source and patches with Write/Edit (one file per call, then check the diff);
+  never via Bash heredocs, `sed` or PowerShell `String.Replace`. Pass PATHS, not contents.
 - Before working, read only what you need: `brief.md`, your handoff, files it names.
 - Never rewrite another role's artifact wholesale; append a `## <role> notes` section or
   open a handoff. Status board: update only your own rows.
-- IDs: next free number in the folder (glob first). Dates ISO `YYYY-MM-DD`.
+- IDs: next free number, taken right before writing (re-read the file, glob every folder of
+  that series; parallel agents append concurrently). Dates ISO `YYYY-MM-DD`.
 
 ## Handoff file (templates/handoff.md) — ≤ 25 lines
 `Goal / Context (paths) / Done so far / Deliverable expected / Acceptance criteria /
@@ -70,6 +72,7 @@ Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your rol
 
 ## Definition of Done (generic; roles add their own)
 - Deliverable at stated path; acceptance criteria checked one by one; assumptions listed;
+  API/tool/module facts checked in the installed files, not recalled (name the check);
   risks logged; lessons recorded; status row updated; next handoff named.
 - Code: builds, tests pass, no new warnings from analyzers, reviewed by code-reviewer for
   non-trivial changes.
@@ -86,8 +89,6 @@ Script: `python "<scripts dir>/lessons.py" <cmd> <project root> --role <your rol
 - Heavy builds/editors: Idle priority, one heavy run at a time, capped processes per agent. OS
   stopped a run for low memory → report and wait; never retry in parallel.
 - Parallel agents: each gets its own git worktree and clean test project, set up before start.
-- Never pass source, patches or multi-line markdown through Bash heredocs, `sed` or PowerShell
-  `String.Replace`; use Edit/Write (one file per call), then check the diff.
 
 ## Token discipline
 - Existing `.team/context/project-map.md` → read it BEFORE any Glob/Grep of code; trust it for

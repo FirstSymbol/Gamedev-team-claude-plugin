@@ -10,7 +10,8 @@ Arguments: $ARGUMENTS
 Follow `studio:orchestrator` and `studio:team-protocol`. Scripts:
 `${CLAUDE_PLUGIN_ROOT}/skills/team-protocol/scripts/`. Reply in the user's language.
 Hard rule for every step: READ-ONLY on the product. No code, config, package or git changes;
-no installs, migrations or deploys. Only `.team/` is written.
+no installs, migrations or deploys. Only `.team/` is written, one file per Write/Edit call
+(never Bash heredocs: multi-file heredoc chains break on Windows Git Bash).
 
 ## 0. Mode (main thread)
 - `team_status.py <root>`. If `.team/context/meta.md` exists and `--refresh` is not given →

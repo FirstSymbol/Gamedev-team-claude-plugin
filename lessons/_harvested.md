@@ -1,105 +1,194 @@
 # Harvest index (written by team-coach via `lessons.py mark`)
 | Project | Role | ID | Hits | Outcome | Ref | Date |
 |---|---|---|---|---|---|---|
-| d:/general/other/projects/unity/plugins development | common | L-001 | 3 | global | G-001 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-002 | 3 | global | G-002 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-003 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-004 | 3 | global | G-003 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-005 | 1 | global | G-004 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-006 | 3 | global | G-005 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-007 | 4 | global | G-006 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-008 | 1 | global | G-007 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-009 | 1 | global | G-008 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-010 | 1 | global | G-009 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | common | L-011 | 1 | global | G-010 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-088 | 1 | global | G-056 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-089 | 1 | global | G-057 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-090 | 1 | global | G-058 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-091 | 2 | global | G-059 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-092 | 1 | global | G-060 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-093 | 1 | global | G-061 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-094 | 1 | global | G-062 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-095 | 1 | global | G-063 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-096 | 3 | global | G-064 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-097 | 1 | global | G-065 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-098 | 1 | global | G-001 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-099 | 1 | global | G-066 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-100 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | devops-sre-engineer | L-101 | 1 | global | G-067 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-012 | 1 | global | G-011 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-013 | 2 | global | G-011 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-014 | 1 | global | G-012 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-015 | 2 | global | G-013 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-016 | 2 | global | G-014 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-017 | 2 | global | G-015 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-018 | 1 | global | G-011 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-019 | 1 | global | G-016 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-020 | 2 | global | G-017 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-021 | 1 | global | G-018 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-022 | 1 | covered | pack playbook | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-023 | 1 | global | G-019 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-024 | 3 | global | G-020 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-025 | 3 | global | G-021 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-026 | 1 | global | G-022 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-027 | 1 | global | G-023 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-028 | 1 | global | G-024 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-029 | 1 | covered | pack playbook | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-030 | 1 | global | G-025 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-031 | 1 | global | G-026 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-032 | 1 | global | G-027 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-033 | 1 | global | G-028 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-034 | 1 | global | G-029 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-035 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-036 | 1 | global | G-030 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-037 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-038 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-039 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-040 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | qa-engineer | L-041 | 1 | global | G-031 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | tech-lead-architect | L-102 | 1 | global | G-006 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-078 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-079 | 3 | global | G-068 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-080 | 1 | global | G-069 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-081 | 2 | global | G-070 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-082 | 1 | global | G-071 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-083 | 1 | global | G-072 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-084 | 1 | global | G-073 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-085 | 1 | global | G-074 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-086 | 1 | global | G-075 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | technical-artist | L-087 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-042 | 1 | global | G-032 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-043 | 1 | covered | pack playbook | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-044 | 1 | global | G-033 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-045 | 3 | global | G-034 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-046 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-047 | 2 | global | G-035 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-048 | 2 | global | G-034 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-049 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-050 | 1 | global | G-035 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-051 | 1 | covered | pack playbook | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-052 | 2 | global | G-036 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-053 | 2 | global | G-037 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-054 | 2 | global | G-037 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-055 | 1 | global | G-038 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-056 | 1 | global | G-039 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-057 | 1 | global | G-040 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-058 | 1 | global | G-041 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-059 | 1 | global | G-042 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-060 | 1 | global | G-043 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-061 | 1 | global | G-044 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-062 | 3 | global | G-045 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-063 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-064 | 1 | global | G-046 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-065 | 2 | global | G-047 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-066 | 1 | global | G-048 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-067 | 1 | global | G-049 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-068 | 2 | global | G-050 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-069 | 1 | global | G-051 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-070 | 1 | global | G-052 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-071 | 1 | global | G-053 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-072 | 1 | global | G-054 | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-073 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-074 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-075 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-076 | 1 | project | - | 2026-11-10 |
-| d:/general/other/projects/unity/plugins development | unity-developer | L-077 | 1 | global | G-055 | 2026-11-10 |
+| p:0f2cd7ddf5bb7803 | tech-lead-architect | L-001 | 1 | global | G-006 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-002 | 1 | embedded | G-089 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-003 | 1 | embedded | G-090 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-004 | 1 | embedded | G-091 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-005 | 1 | global | G-092 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-006 | 1 | global | G-093 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-007 | 1 | global | G-094 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-008 | 1 | global | G-095 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-009 | 1 | global | G-096 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-010 | 1 | global | G-097 | 2026-11-11 |
+| p:0f2cd7ddf5bb7803 | unity-developer | L-011 | 1 | global | G-098 | 2026-11-11 |
+| p:18488f2c32d61514 | art-director | L-010 | 2 | embedded | G-139 | 2026-11-11 |
+| p:18488f2c32d61514 | devops-sre-engineer | L-007 | 1 | embedded | G-108+G-109 | 2026-11-11 |
+| p:18488f2c32d61514 | devops-sre-engineer | L-008 | 1 | global | G-110 | 2026-11-11 |
+| p:18488f2c32d61514 | devops-sre-engineer | L-009 | 1 | embedded | G-108 | 2026-11-11 |
+| p:18488f2c32d61514 | lead-game-designer | L-001 | 1 | embedded | G-099 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-010 | 1 | global | G-114 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-011 | 1 | covered | G-006 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-016 | 1 | global | G-101 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-022 | 1 | embedded | G-111 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-023 | 1 | embedded | G-112 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-024 | 1 | global | G-102 | 2026-11-11 |
+| p:18488f2c32d61514 | multiplayer-network-engineer | L-025 | 1 | global | G-103 | 2026-11-11 |
+| p:18488f2c32d61514 | producer | L-003 | 1 | global | G-141 | 2026-11-11 |
+| p:18488f2c32d61514 | tech-lead-architect | L-002 | 1 | embedded | G-099 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-013 | 1 | embedded | G-125 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-014 | 1 | global | G-128 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-015 | 1 | global | G-129 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-019 | 1 | global | G-130 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-020 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-021 | 1 | embedded | G-127 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-028 | 1 | global | G-131 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-029 | 1 | embedded | G-127 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-030 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-031 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-032 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-038 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-039 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-040 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-041 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-046 | 1 | embedded | G-126 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-055 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-056 | 1 | embedded | G-127 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-057 | 1 | global | G-132 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-058 | 1 | embedded | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-059 | 1 | covered | - | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-060 | 1 | global | G-133 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-061 | 1 | embedded | G-107 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-062 | 1 | embedded | G-126 | 2026-11-11 |
+| p:18488f2c32d61514 | technical-artist | L-063 | 1 | embedded | G-125 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-004 | 1 | global | G-105 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-005 | 1 | global | G-104 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-006 | 2 | embedded | G-107 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-011 | 1 | global | G-140 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-012 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-018 | 1 | covered | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-026 | 1 | global | G-134 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-033 | 1 | global | G-115 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-034 | 1 | embedded | G-112 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-035 | 1 | global | G-116 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-036 | 1 | embedded | G-113 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-037 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-038 | 1 | embedded | G-015 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-039 | 1 | embedded | G-100 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-040 | 1 | global | G-117 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-042 | 1 | global | G-106 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-043 | 1 | embedded | G-113 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-044 | 1 | dropped | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-045 | 1 | global | G-122 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-049 | 1 | global | G-121 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-050 | 1 | global | G-118 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-051 | 1 | global | G-119 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-052 | 1 | covered | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-053 | 1 | covered | - | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-054 | 1 | embedded | G-100 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-055 | 1 | embedded | G-015 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-056 | 1 | global | G-124 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-057 | 1 | embedded | G-084 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-058 | 1 | global | G-142 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-064 | 1 | global | G-123 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-065 | 1 | global | G-120 | 2026-11-11 |
+| p:18488f2c32d61514 | unity-developer | L-066 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-017 | 1 | global | G-137 | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-027 | 1 | embedded | G-078 | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-028 | 1 | global | G-136 | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-029 | 1 | global | G-135 | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-030 | 1 | project | - | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-047 | 1 | global | G-138 | 2026-11-11 |
+| p:18488f2c32d61514 | ux-ui-designer | L-048 | 1 | global | G-135 | 2026-11-11 |
+| p:6cb0e43aa6f6fda6 | common | L-001 | 3 | global | G-001 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-002 | 3 | global | G-002 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-003 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-004 | 3 | global | G-003 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-005 | 1 | global | G-004 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-006 | 3 | global | G-005 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-007 | 4 | global | G-006 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-008 | 1 | global | G-007 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-009 | 1 | global | G-008 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-010 | 1 | global | G-009 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | common | L-011 | 1 | global | G-010 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-088 | 1 | global | G-056 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-089 | 1 | global | G-057 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-090 | 1 | global | G-058 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-091 | 2 | global | G-059 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-092 | 1 | global | G-060 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-093 | 1 | global | G-061 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-094 | 1 | global | G-062 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-095 | 1 | global | G-063 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-096 | 3 | global | G-064 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-097 | 1 | global | G-065 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-098 | 1 | global | G-001 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-099 | 1 | global | G-066 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-100 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | devops-sre-engineer | L-101 | 1 | global | G-067 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-012 | 1 | global | G-011 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-013 | 2 | global | G-011 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-014 | 1 | global | G-012 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-015 | 2 | global | G-013 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-016 | 2 | global | G-014 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-017 | 2 | global | G-015 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-018 | 1 | global | G-011 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-019 | 1 | global | G-016 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-020 | 2 | global | G-017 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-021 | 1 | global | G-018 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-022 | 1 | covered | pack playbook | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-023 | 1 | global | G-019 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-024 | 3 | global | G-020 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-025 | 3 | global | G-021 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-026 | 1 | global | G-022 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-027 | 1 | global | G-023 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-028 | 1 | global | G-024 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-029 | 1 | covered | pack playbook | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-030 | 1 | global | G-025 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-031 | 1 | global | G-026 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-032 | 1 | global | G-027 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-033 | 1 | global | G-028 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-034 | 1 | global | G-029 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-035 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-036 | 1 | global | G-030 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-037 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-038 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-039 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-040 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | qa-engineer | L-041 | 1 | global | G-031 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | tech-lead-architect | L-102 | 1 | global | G-006 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-078 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-079 | 3 | global | G-068 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-080 | 1 | global | G-069 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-081 | 2 | global | G-070 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-082 | 1 | global | G-071 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-083 | 1 | global | G-072 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-084 | 1 | global | G-073 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-085 | 1 | global | G-074 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-086 | 1 | global | G-075 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | technical-artist | L-087 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-042 | 1 | global | G-032 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-043 | 1 | covered | pack playbook | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-044 | 1 | global | G-033 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-045 | 3 | global | G-034 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-046 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-047 | 2 | global | G-035 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-048 | 2 | global | G-034 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-049 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-050 | 1 | global | G-035 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-051 | 1 | covered | pack playbook | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-052 | 2 | global | G-036 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-053 | 2 | global | G-037 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-054 | 2 | global | G-037 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-055 | 1 | global | G-038 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-056 | 1 | global | G-039 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-057 | 1 | global | G-040 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-058 | 1 | global | G-041 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-059 | 1 | global | G-042 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-060 | 1 | global | G-043 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-061 | 1 | global | G-044 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-062 | 3 | global | G-045 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-063 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-064 | 1 | global | G-046 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-065 | 2 | global | G-047 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-066 | 1 | global | G-048 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-067 | 1 | global | G-049 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-068 | 2 | global | G-050 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-069 | 1 | global | G-051 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-070 | 1 | global | G-052 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-071 | 1 | global | G-053 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-072 | 1 | global | G-054 | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-073 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-074 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-075 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-076 | 1 | project | - | 2026-11-10 |
+| p:6cb0e43aa6f6fda6 | unity-developer | L-077 | 1 | global | G-055 | 2026-11-10 |

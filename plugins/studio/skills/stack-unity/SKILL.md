@@ -41,6 +41,8 @@ instead of restating engine facts.
   non-readonly; no properties (use `[field: SerializeField]`), no `Dictionary` before 6.6, no
   polymorphism without `[SerializeReference]`; renames need `[FormerlySerializedAs]`. One
   MonoBehaviour/ScriptableObject per file, named like it (else `m_Script` fileID 0 = missing script).
+  Saved scene/prefab/asset values override C# field initializers: take gameplay numbers from the
+  shipped asset or server config, never from the code default.
 - **Main thread**: all `UnityEngine.Object` APIs on the main thread only. Background work =
   plain C#, Jobs/Burst on NativeContainers, or `Awaitable.BackgroundThreadAsync()` then back.
 - **Unity null**: destroyed objects `== null` but are not C# null; never `?.`/`??`/`is null`
@@ -55,6 +57,8 @@ instead of restating engine facts.
   layout, text) need a player screenshot of a dev scene.
 - **The human's open editor is off-limits**: no tests, restarts or `EditorApplication.Exit` in
   it; use a separate batch-mode editor on a clean sandbox copy. Save modal → press only Cancel.
+  Editor tools that open/create scenes call `SaveCurrentModifiedScenesIfUserWantsTo` first and
+  restore the scene setup in `finally` (or are batch-only, no MenuItem); never discard scenes.
 - **Discovery**: run team-protocol `scan_unity_project.py` before reading project files.
 
 ## References (read on demand)

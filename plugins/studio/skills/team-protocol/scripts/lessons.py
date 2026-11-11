@@ -24,9 +24,13 @@ export/import merge by rule text (Hits = max, never summed), so repeated syncs a
 Harvest index (~/.claude/studio/lessons/_harvested.md, synced by export/import): which source
 project rows a retro already processed. `list` in that project hides rows carried elsewhere
 (embedded/global/covered/dropped) until their Hits grow; `pending` shows only unprocessed rows.
+Projects are keyed by an opaque hash (p:<sha256[:16]>) of the git remote without login, else of
+the folder path, so the synced index never holds paths, logins or repo names. Old raw keys are
+converted on read. Evidence in global rows must not name client projects, paths or commits.
 """
 import argparse
 import datetime
+import hashlib
 import os
 import re
 import subprocess
@@ -104,9 +108,19 @@ def norm(s):
     return re.sub(r"[^a-z0-9 ]", "", s.lower())
 
 
-def project_keys(root):
+def hkey(raw):
+    """Opaque project key for the git-synced index: never store paths, logins or repo URLs."""
+    raw = raw.strip()
+    if raw.startswith("p:"):
+        return raw
+    if raw.startswith("git:"):
+        raw = "git:" + re.sub(r"^[^@/]+@", "", raw[4:])
+    return "p:" + hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
+
+
+def raw_project_keys(root):
     root = os.path.abspath(root)
-    keys = {root.replace("\\", "/").rstrip("/").lower()}
+    keys = [root.replace("\\", "/").rstrip("/").lower()]
     try:
         r = subprocess.run(["git", "-C", root, "remote", "get-url", "origin"],
                            capture_output=True, text=True, timeout=10)
@@ -114,9 +128,19 @@ def project_keys(root):
     except (OSError, subprocess.SubprocessError):
         url = ""
     if url:
-        url = re.sub(r"^(https?://|ssh://|git@)", "", url.lower()).replace(":", "/")
-        keys.add("git:" + re.sub(r"\.git$", "", url).rstrip("/"))
+        url = re.sub(r"^(https?://|ssh://)", "", url.lower())
+        url = re.sub(r"^[^@/]+@", "", url).replace(":", "/")
+        keys.insert(0, "git:" + re.sub(r"\.git$", "", url).rstrip("/"))
     return keys
+
+
+def project_keys(root):
+    return {hkey(k) for k in raw_project_keys(root)}
+
+
+def project_key(root):
+    """Primary key: git remote (stable across machines) if any, else the folder path."""
+    return hkey(raw_project_keys(root)[0])
 
 
 def index_rows(d=None):
@@ -125,7 +149,7 @@ def index_rows(d=None):
         if line.startswith("| ") and not line.startswith("| Project") and not line.startswith("|---"):
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
             if len(cells) >= 7:
-                out.append(cells[:7])
+                out.append([hkey(cells[0])] + cells[1:7])
     return out
 
 
@@ -312,16 +336,20 @@ def cmd_mark(a):
         print(f"ERROR: --outcome must be one of {', '.join(OUTCOMES)}")
         return 1
     keys = project_keys(a.root)
-    key = next((k for k in sorted(keys) if k.startswith("git:")), None) or next(iter(keys))
-    src = {r[0]: (role, r) for role, r in source_rows(a.root)}
+    key = project_key(a.root)
+    src = [(role, r) for role, r in source_rows(a.root) if not a.role or role == a.role]
     idx = [r for r in index_rows()]
     today = datetime.date.today().isoformat()
     marked = 0
     for lid in [x.strip() for x in a.id.split(",") if x.strip()]:
-        if lid not in src:
-            print(f"ERROR: {lid} not found in {store(a.root, False)}")
+        hits = [(role, r) for role, r in src if r[0] == lid]
+        if not hits:
+            print(f"ERROR: {lid} not found in {store(a.root, False)}" + (f" for {a.role}" if a.role else ""))
             return 1
-        role, r = src[lid]
+        if len(hits) > 1:
+            print(f"ERROR: {lid} exists in roles {', '.join(h[0] for h in hits)}; pass --role")
+            return 1
+        role, r = hits[0]
         idx = [x for x in idx if not (x[0] in keys and x[1] == role and x[2] == lid)]
         idx.append([key, role, lid, r[6], a.outcome, clean(a.ref or "-"), today])
         marked += 1
@@ -428,6 +456,7 @@ def main():
             s.add_argument("--id", required=True)
             s.add_argument("--outcome", required=True)
             s.add_argument("--ref")
+            s.add_argument("--role", help="required when the same ID exists in several roles")
         if name == "export":
             s.add_argument("--replace", action="store_true")
         if name == "list":

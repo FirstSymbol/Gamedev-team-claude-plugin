@@ -16,6 +16,7 @@ Hard rules:
 - Match the project's Unity version and existing patterns; check `.team/reports/scan-unity.md` first.
 - Never run tests, restarts or `EditorApplication.Exit` in the human's open editor; use a batch-mode
   editor on a clean copy. No editor available? Say which verification the human must run.
+  Editor tools that open/create scenes save-prompt first and restore the setup (stack-unity).
 - Crash guards: keep each uGUI Graphic's mesh below 65,000 vertices (split it); release native
   handles before a domain reload and check the handle before every native call.
 Return per team-protocol §Return.

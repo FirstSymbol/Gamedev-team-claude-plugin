@@ -1,0 +1,7 @@
+# Lessons: ux-ui-designer
+| ID | Date | Sev | Tags | Rule | Evidence | Hits |
+|---|---|---|---|---|---|---|
+| G-135 | 2026-11-11 | S2 | figma,mcp,plugin-api | In Figma plugin code load only the fonts you use, create variable-bound paints with the resolved colour, bind strokeWeight last (later sets drop the binding), and treat section children x/y as parent-relative. | src: p:18488f2c32d61514:L-029+L-048 merged; font loading hung, bound paints stayed black, bindings dropped, previews misplaced | 2 |
+| G-136 | 2026-11-11 | S2 | figma,tokens,regression | Before changing a shared variable's value, list every node bound to it; re-point approved frames to a dedicated variable and diff their exported PNGs before and after. | src: p:18488f2c32d61514:L-028; a shared alpha change would have altered an approved screen; caught by a binding scan | 1 |
+| G-137 | 2026-11-11 | S3 | hud,pc,scale,accessibility | For desk-distance PC games size HUD text to PC norms, not 10-foot TV minimums, and ship a UI-scale setting for accessibility. | src: p:18488f2c32d61514:L-017; owner found HUD elements far too large | 1 |
+| G-138 | 2026-11-11 | S2 | contrast,scrim,accessibility,hud | Before replacing a text plate with a gradient scrim, measure contrast of the dimmest text over pure white at the scrim's hold alpha; 4.5:1 typically needs about 85% opacity. | src: p:18488f2c32d61514:L-047; dim text reached 4.5:1 only at >=85% scrim alpha | 1 |

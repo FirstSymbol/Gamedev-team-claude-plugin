@@ -29,11 +29,14 @@ the right place, so agents stop repeating errors without bloating their context.
    Source project `<p>`: `pending <p>` (only rows never harvested or whose Hits grew; skip
    the rest), plus `<p>/.team/reports/pack-improvements.md` and `<p>/.team/roles.md`.
    Sources are read-only: never edit `<p>`. Generic source row → `add --global`, evidence
-   `src: <p>:<ID>`; Hits grew on a harvested row → `bump` its global row (Ref in the index).
+   `src: <key>:<ID>; <generic fact>` (`<key>` = the `p:` key that `mark` prints); Hits grew on a
+   harvested row → `bump` its global row (Ref in the index). Project-specific row → leave it in
+   `<p>` (`mark --outcome project`). Global rules and evidence are git-synced: never put paths,
+   logins, repo/client/project names, commit hashes, class or file names from `<p>`, or quotes.
 1b. Free-form file `<f>`: read whole (> 1500 lines → Grep error/bug/fix/mistake keywords in
    its language, read hits ± 10 lines). Per mistake + fix: rule "Do X when Y"; role = author
    role, else the role owning that code area, else `common`; record with `add`, evidence
-   `src: <path relative to root, else absolute>:<line>`. Hits = total occurrences the file
+   `src: <file name>:<line>` (no absolute paths). Hits = total occurrences the file
    states ("third time" → 3: add, then bump twice). Skip one-off facts and unclear items.
    Secrets/personal data: never copy; note location only, add a risk row (rotate).
    The described fix contradicts the playbook → keep the playbook rule; flag the conflict.
@@ -57,7 +60,8 @@ the right place, so agents stop repeating errors without bloating their context.
 6. After an embedding edit exists (yours or pre-existing), `delete` the project row; keep
    global rows until the pack release with the rule is installed.
 7. Index every processed source row: `mark <p> --id <IDs> --outcome embedded|global|project|
-   covered|dropped [--ref G-NNN]` (next retro skips them; `list` in `<p>` hides carried ones).
+   covered|dropped [--ref G-NNN] [--role <r>]` (`--role` if an ID exists in several roles; next
+   retro skips them; `list` in `<p>` hides carried ones).
    Pack scope: apply verified source `pack-improvements.md` proposals (step 5 rules), then
    `lessons.py export <root>/lessons --replace` (also syncs the harvest index).
 8. Retro report: counts before/after; deleted (reason), merged, moved, promoted, embedded

@@ -45,6 +45,8 @@ Mission: every build reproducible, every deploy reversible, every outage short a
 
 ## Quality bar
 - [ ] Pipeline green on a clean runner; no manual steps from commit to stage deploy.
+- [ ] CI/local scripts proven on the target machine: documented command run verbatim, and a
+  forced failure turns the step red (no false green; Windows: `powershell -File`, no pwsh assumed).
 - [ ] Artifacts traceable to commit SHA + version; build numbers strictly increasing.
 - [ ] No secrets in repo, logs, or images (`gitleaks` clean); CI uses OIDC/short-lived creds where possible.
 - [ ] Tests + coverage gate + dependency/container scan run on every PR; failures block merge.

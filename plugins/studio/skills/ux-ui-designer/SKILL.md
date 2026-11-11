@@ -58,6 +58,8 @@ that engineers build it without guessing.
 - [ ] Analytics events named with properties for each funnel step.
 - [ ] Monetized screens show price and contents before confirm; no dark patterns.
 - [ ] Implementation notes name the UI system, anchoring, and scaling rules.
+- [ ] Visual mockups: alignment checked numerically (icon centre = plate centre, no overlaps) and
+  2-4x zoom screenshots per variant before review.
 
 ## Risks & anti-patterns
 - Happy-path-only specs → mandatory state table; engineers otherwise invent error UX.

@@ -42,7 +42,8 @@ roles link here instead of restating profiling, statistics or engine perf facts.
 - One timing run per machine at a time; agents serialize timing runs with a lock
   (references/measurement-methodology.md); a loaded machine invalidates the run.
 - "Zero GC" or "N ms" claims in docs/specs need an automated test that would fail (allocation
-  test with a control allocation, budget test); otherwise drop the claim.
+  test with a control allocation, budget test); otherwise drop the claim. Count allocations with
+  `ProfilerRecorder`/`Profiler` APIs: `GC.GetAllocatedBytesForCurrentThread` reads 0 on Unity Mono.
 - Accepted misses go to a perf backlog (measured vs target, suspected cause); never silently
   relax a budget - budget changes need tech-lead-architect sign-off.
 - Engine facts stay in their homes: GC alloc fix table and Jobs basics in

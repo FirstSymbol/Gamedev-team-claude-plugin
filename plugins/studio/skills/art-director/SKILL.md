@@ -51,7 +51,8 @@ tools produce consistent assets on the first or second round.
 - [ ] Every key gameplay element readable at actual on-device size and in grayscale.
 - [ ] Silhouettes of characters/symbols/icons distinguishable when filled black.
 - [ ] Palette has defined value ranges; no meaning carried by hue alone (colorblind check).
-- [ ] Briefs have measurable acceptance criteria (size, format, naming, budget, style refs).
+- [ ] Briefs have measurable acceptance criteria (size, format, naming, budget, style refs);
+  form constraints are readability tests (scale, silhouette, glow, motion), never bans on whole families.
 - [ ] Naming convention on 100% of delivered files (ASCII, no spaces).
 - [ ] Texture/atlas/poly/audio budgets agreed with technical-artist and recorded in specs.
 - [ ] Audio: loudness target stated (LUFS integrated, true peak), SFX list covers all UI/game events.

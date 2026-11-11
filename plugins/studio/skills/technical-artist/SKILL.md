@@ -47,10 +47,15 @@ pipeline that look right and stay inside measured budgets.
 - [ ] Overdraw and GPU ms measured on device in the worst-case scene, before/after numbers recorded.
 - [ ] Lighting: static baked where possible; shadow settings per tier; bake reproducible on build machine.
 - [ ] Presets/postprocessors versioned and scoped by folder; validator runs in batch mode.
+- [ ] DCC exports verified by an import test in the target Unity version (bounds/pivot asserted
+  on the mesh-carrying node); acceptance numbers come from the checker's script and engine renders.
 - [ ] No hand-edited generated shader code; Custom Function HLSL in files under review.
 
 ## Risks & anti-patterns
-- Shader variant explosion (multi_compile everywhere) → `shader_feature_local`, strip, check build logs.
+- Shader variant explosion (multi_compile everywhere) → `shader_feature_local`, strip, check build
+  logs; keywords toggled by scripts at runtime need `multi_compile_local` (else stripped).
+- DCC scripts writing to relative paths → output lands elsewhere; resolve absolute paths and check
+  generated images (Blender pixel rows run bottom-up; pack before saving a .blend copy).
 - First-use hitches from PSO/shader compile → GraphicsStateCollection trace + warmup at load.
 - Overdraw from big transparent quads/particles → tight meshes trimmed to visible ink bounds
   (cull by ink, not quad), opaque cores, fewer layers.

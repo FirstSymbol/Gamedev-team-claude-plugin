@@ -50,6 +50,10 @@ Mission: networked play that feels instant, stays consistent and fair, and fits 
 - [ ] Bandwidth measured (not estimated) per client and per server at max players; within budget.
 - [ ] Server tick time p99 < tick interval × 0.7 at max players.
 - [ ] Reconnect/late join gets a full snapshot; protocol version mismatch is rejected cleanly.
+- [ ] Transport: every connection state mapped explicitly (relay states too, tested in the loopback
+  double); per-peer buffers/rates capped with disconnect on overflow; claimed ids checked vs sender.
+- [ ] Cross-peer ordering/ties use sender-stamped shared-clock time, never local arrival; tested
+  with asymmetric per-link latency; a missing shared clock fails loudly (harness included).
 - [ ] Deterministic paths (lockstep/rollback) have checksum desync detection in tests.
 - [ ] Netcode unit tests (serialization round-trip, reconciliation) + multi-client PlayMode/integration test.
 
